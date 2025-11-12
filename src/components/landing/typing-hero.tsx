@@ -21,7 +21,7 @@ export function TypingHero() {
   const [lineWidth, setLineWidth] = useState<number>(0);
 
   const measureClasses = useMemo(
-    () => "text-4xl font-bold uppercase tracking-[0.3em] md:text-5xl whitespace-nowrap",
+    () => "text-5xl font-bold uppercase tracking-[0.3em] md:text-6xl whitespace-nowrap",
     [],
   );
 
@@ -54,7 +54,7 @@ export function TypingHero() {
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="relative flex w-full items-center justify-center">
-          <h1 className="gradient-text text-4xl font-bold uppercase tracking-[0.3em] md:text-5xl">
+          <h1 className="text-5xl font-bold uppercase tracking-[0.3em] text-text md:text-6xl">
             <span
               className="inline-flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap"
               style={
@@ -80,7 +80,7 @@ export function TypingHero() {
           className={`${measureClasses} absolute -left-[9999px] -top-[9999px]`}
         />
         <motion.ul
-          className="flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-[0.5em] text-muted md:gap-8"
+          className="flex flex-wrap items-center justify-center gap-6 text-sm uppercase tracking-[0.5em] text-muted md:gap-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}

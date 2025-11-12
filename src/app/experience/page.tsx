@@ -52,14 +52,14 @@ export default function ExperiencePage() {
                       <h3 className="text-lg font-medium uppercase tracking-[0.3em] text-text transition-colors duration-300 group-hover:text-accent">
                         {item.company}
                       </h3>
-                      <p className="text-muted/90 text-sm font-medium uppercase tracking-[0.5em]">
+                      <p className="text-muted/90 text-base font-medium uppercase tracking-[0.5em]">
                         {item.role}
                       </p>
-                      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
+                      <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
                         {item.summary}
                       </p>
                     </div>
-                    <span className="text-muted/80 mt-1 text-xs font-medium uppercase tracking-[0.5em] sm:mt-0">
+                    <span className="text-muted/80 mt-1 text-sm font-medium uppercase tracking-[0.5em] sm:mt-0">
                       {item.period}
                     </span>
                   </article>
