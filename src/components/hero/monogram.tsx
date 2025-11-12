@@ -37,7 +37,7 @@ export function Monogram() {
 
   useEffect(() => {
     const controls = animate(progress, hovered ? 1 : 0, {
-      duration: 0.75,
+      duration: 0.6,
       ease,
     });
 
@@ -51,7 +51,9 @@ export function Monogram() {
       onHoverEnd={() => setHovered(false)}
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
-      whileTap={{ scale: 0.98 }}
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.3, ease }}
       role="img"
       aria-label="Hover to reveal LUV"
       tabIndex={0}
@@ -59,6 +61,7 @@ export function Monogram() {
       <motion.div
         className="from-accent/25 via-accent-3/20 absolute inset-0 rounded-full bg-gradient-to-br to-transparent blur-2xl"
         style={{ opacity: glowOpacity }}
+        transition={{ duration: 0.6, ease }}
         aria-hidden
       />
       <motion.svg
@@ -75,14 +78,14 @@ export function Monogram() {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={6}
-          transition={{ duration: 0.75, ease }}
+          transition={{ duration: 0.6, ease }}
         />
       </motion.svg>
       <motion.div
         className="absolute bottom-0 left-0 right-0 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.3, delay: 0.2 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
+        transition={{ duration: 0.3, delay: hovered ? 0.2 : 0, ease }}
       >
         <span className="text-xs uppercase tracking-[0.5em] text-muted">Hover to reveal</span>
       </motion.div>

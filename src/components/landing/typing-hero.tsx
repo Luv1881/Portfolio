@@ -67,27 +67,41 @@ export function TypingHero() {
         </h1>
         {/* Hidden measurer to lock a stable width and prevent layout shift */}
         <span ref={measureRef} className={`${measureClasses} absolute -left-[9999px] -top-[9999px]`} />
-        <ul className="flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-[0.5em] text-muted md:gap-8">
-          {NAV_ITEMS.map(({ href, label }) => (
-            <li key={href}>
+        <motion.ul
+          className="flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-[0.5em] text-muted md:gap-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {NAV_ITEMS.map(({ href, label }, index) => (
+            <motion.li
+              key={href}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.4 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
               <Link
                 href={href}
                 prefetch
-                className="inline-block rounded-full border border-border/40 px-6 py-3 text-text transition-all hover:border-accent hover:text-accent hover:shadow-md"
+                className="inline-block rounded-full border border-border/40 px-6 py-3 text-text transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:shadow-md hover:scale-105 active:scale-95"
               >
                 {label}
               </Link>
-            </li>
+            </motion.li>
           ))}
-          <li>
+          <motion.li
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.4 + NAV_ITEMS.length * 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
             <a
               href={CONTACT_LINK}
-              className="inline-block rounded-full border border-border/40 px-6 py-3 text-text transition-all hover:border-accent hover:text-accent hover:shadow-md"
+              className="inline-block rounded-full border border-border/40 px-6 py-3 text-text transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:shadow-md hover:scale-105 active:scale-95"
             >
               Contact
             </a>
-          </li>
-        </ul>
+          </motion.li>
+        </motion.ul>
       </motion.section>
     </main>
   );

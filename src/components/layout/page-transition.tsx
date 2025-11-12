@@ -69,26 +69,26 @@ export function PageTransition({ children }: PageTransitionProps) {
     const randChar = () => CHARS[Math.floor(Math.random() * CHARS.length)] ?? "0";
     const makeSequence = (len: number) => Array.from({ length: len }, () => randChar());
 
-    const columnCount = 42;
+    const columnCount = 32;
     const newColumns: Column[] = Array.from({ length: columnCount }, (_, i) => {
       // Distribute columns evenly with slight jitter
       const jitter = (Math.random() - 0.5) * (100 / columnCount) * 0.5;
       const rawLeft = (i / columnCount) * 100 + jitter;
       const left = Math.min(98, Math.max(1, rawLeft));
-      
-      const delay = Math.random() * 0.25;
-      const duration = 1.4 + Math.random() * 0.6;
+
+      const delay = Math.random() * 0.15;
+      const duration = 0.85 + Math.random() * 0.35;
       const fontSize = 15 + Math.round(Math.random() * 7);
-      const length = 30 + Math.round(Math.random() * 20);
+      const length = 25 + Math.round(Math.random() * 15);
       const sequence = makeSequence(length);
-      
-      return { 
-        id: i + Date.now(), 
-        left, 
-        delay, 
-        duration, 
-        fontSize, 
-        sequence 
+
+      return {
+        id: i + Date.now(),
+        left,
+        delay,
+        duration,
+        fontSize,
+        sequence
       };
     });
 
@@ -107,15 +107,15 @@ export function PageTransition({ children }: PageTransitionProps) {
     longestDuration.current = maxDuration;
 
     // Show new content at peak of animation (when overlay starts fading)
-    const contentDelay = (maxDuration * 0.65) * 1000;
+    const contentDelay = (maxDuration * 0.5) * 1000;
     const contentTimeout = window.setTimeout(() => {
       setShowContent(true);
     }, contentDelay);
 
     // Hide matrix after animation completes
     const matrixTimeout = window.setTimeout(
-      () => setIsMatrix(false), 
-      (maxDuration + 0.3) * 1000
+      () => setIsMatrix(false),
+      (maxDuration + 0.2) * 1000
     );
     
     return () => {
@@ -128,10 +128,10 @@ export function PageTransition({ children }: PageTransitionProps) {
   
   const timings = useMemo(
     () => ({
-      overlayFade: longestDuration.current + 0.35,
-      glitchPrimary: Math.max(longestDuration.current + 0.2, 0.8),
-      glitchSecondary: Math.max(longestDuration.current + 0.35, 1.0),
-      glitchDelay: Math.max(longestDuration.current * 0.3, 0.15),
+      overlayFade: longestDuration.current + 0.25,
+      glitchPrimary: Math.max(longestDuration.current + 0.15, 0.6),
+      glitchSecondary: Math.max(longestDuration.current + 0.25, 0.8),
+      glitchDelay: Math.max(longestDuration.current * 0.25, 0.1),
     }),
     [longestDuration.current],
   );
@@ -147,7 +147,7 @@ export function PageTransition({ children }: PageTransitionProps) {
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: transitionEase }}
+            transition={{ duration: 0.25, ease: transitionEase }}
             aria-hidden="true"
           >
             {/* Dark overlay with fade */}
@@ -254,11 +254,11 @@ export function PageTransition({ children }: PageTransitionProps) {
         {showContent && (
           <motion.div
             key={pathname}
-            initial={prefersReduced ? false : { opacity: 0, filter: "blur(8px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            exit={prefersReduced ? { opacity: 0 } : { opacity: 0, filter: "blur(4px)" }}
-            transition={{ 
-              duration: prefersReduced ? 0.2 : 0.5, 
+            initial={prefersReduced ? false : { opacity: 0, filter: "blur(6px)", y: 10 }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            exit={prefersReduced ? { opacity: 0 } : { opacity: 0, filter: "blur(3px)", y: -5 }}
+            transition={{
+              duration: prefersReduced ? 0.2 : 0.4,
               ease: transitionEase,
             }}
             className="flex min-h-screen flex-col"
