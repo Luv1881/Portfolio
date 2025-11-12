@@ -46,7 +46,7 @@ export function Monogram() {
 
   return (
     <motion.div
-      className="relative mx-auto flex h-56 w-56 cursor-pointer items-center justify-center"
+      className="relative mx-auto flex h-56 w-56 items-center justify-center cursor-pointer"
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       onFocus={() => setHovered(true)}
@@ -87,10 +87,9 @@ export function Monogram() {
         animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
         transition={{ duration: 0.3, delay: hovered ? 0.2 : 0, ease }}
       >
-        <span className="text-xs uppercase tracking-[0.5em] text-muted">
-          Hover to reveal
-        </span>
+        <span className="text-xs uppercase tracking-[0.5em] text-muted">Hover to reveal</span>
       </motion.div>
     </motion.div>
   );
 }
+

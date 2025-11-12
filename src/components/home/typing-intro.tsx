@@ -29,16 +29,13 @@ export function TypingIntro() {
       setIsDeleting(false);
       setPhraseIndex((index) => index + 1);
     } else {
-      timeout = window.setTimeout(
-        () => {
-          if (isDeleting) {
-            setDisplayName((prev) => prev.slice(0, -1));
-          } else {
-            setDisplayName(currentPhrase.slice(0, displayName.length + 1));
-          }
-        },
-        isDeleting ? DELETE_INTERVAL : TYPE_INTERVAL,
-      );
+      timeout = window.setTimeout(() => {
+        if (isDeleting) {
+          setDisplayName((prev) => prev.slice(0, -1));
+        } else {
+          setDisplayName(currentPhrase.slice(0, displayName.length + 1));
+        }
+      }, isDeleting ? DELETE_INTERVAL : TYPE_INTERVAL);
     }
 
     return () => window.clearTimeout(timeout);
@@ -65,11 +62,7 @@ export function TypingIntro() {
       </div>
       <div className="flex flex-col gap-4 text-sm uppercase tracking-[0.3em] text-muted md:flex-row">
         {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="transition hover:text-accent"
-          >
+          <Link key={link.href} href={link.href} className="transition hover:text-accent">
             {link.label}
           </Link>
         ))}
