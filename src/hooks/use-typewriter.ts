@@ -28,12 +28,9 @@ export function useTypewriter({
   const current = words[index % words.length] ?? "";
 
   // Clear any pending timer on unmount
-  useEffect(
-    () => () => {
-      if (timer.current) window.clearTimeout(timer.current);
-    },
-    [],
-  );
+  useEffect(() => () => {
+    if (timer.current) window.clearTimeout(timer.current);
+  }, []);
 
   useEffect(() => {
     // If no words, do nothing
@@ -75,21 +72,11 @@ export function useTypewriter({
     return () => {
       if (timer.current) window.clearTimeout(timer.current);
     };
-  }, [
-    text,
-    isDeleting,
-    index,
-    current,
-    typeSpeed,
-    deleteSpeed,
-    holdTime,
-    startDelay,
-    loop,
-    words.length,
-  ]);
+  }, [text, isDeleting, index, current, typeSpeed, deleteSpeed, holdTime, startDelay, loop, words.length]);
 
   return useMemo(
     () => ({ text, isDeleting, isComplete, index }),
     [text, isDeleting, isComplete, index],
   );
 }
+
