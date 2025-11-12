@@ -1,7 +1,10 @@
+"use client";
+
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Section } from "@/components/sections/section";
 import { SectionList } from "@/components/sections/list";
+import { motion } from "framer-motion";
 
 type ExperienceEntry = {
   company: string;
@@ -44,16 +47,30 @@ export default function ExperiencePage() {
             items={[...experience]}
             getKey={(item) => item.company}
             renderItem={(item) => (
-              <article className="flex flex-col gap-3 py-4 transition-all duration-300 hover:translate-x-1 sm:flex-row sm:items-baseline sm:justify-between">
+              <motion.article
+                className="flex flex-col gap-3 py-4 group sm:flex-row sm:items-baseline sm:justify-between"
+                initial="rest"
+                whileHover="hover"
+                variants={{
+                  rest: { x: 0 },
+                  hover: { x: 4, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } },
+                }}
+              >
                 <div className="flex-1">
-                  <h3 className="text-lg font-medium uppercase tracking-[0.3em] text-text">
+                  <h3 className="text-lg font-medium uppercase tracking-[0.3em] text-text transition-colors duration-300">
                     {item.company}
                   </h3>
-                  <p className="text-sm uppercase tracking-[0.5em] text-muted/90 font-medium">{item.role}</p>
-                  <p className="mt-3 max-w-2xl text-sm text-muted leading-relaxed">{item.summary}</p>
+                  <p className="text-sm uppercase tracking-[0.5em] text-muted/90 font-medium transition-colors duration-300 group-hover:text-text/80">
+                    {item.role}
+                  </p>
+                  <p className="mt-3 max-w-2xl text-sm text-muted leading-relaxed transition-colors duration-300">
+                    {item.summary}
+                  </p>
                 </div>
-                <span className="text-xs uppercase tracking-[0.5em] text-muted/80 font-medium mt-1 sm:mt-0">{item.period}</span>
-              </article>
+                <span className="text-xs uppercase tracking-[0.5em] text-muted/80 font-medium mt-1 sm:mt-0 transition-colors duration-300">
+                  {item.period}
+                </span>
+              </motion.article>
             )}
           />
         </Section>

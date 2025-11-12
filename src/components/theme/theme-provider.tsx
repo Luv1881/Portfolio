@@ -35,13 +35,27 @@ function getInitialTheme(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.setAttribute("data-theme", theme);
-    window.localStorage.setItem("theme", theme);
-  }, [theme]);
+    setMounted(true);
+    const storedTheme = window.localStorage.getItem("theme");
+    if (storedTheme === "light" || storedTheme === "dark") {
+      setTheme(storedTheme);
+    } else {
+      const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+      setTheme(prefersLight ? "light" : "dark");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      const root = document.documentElement;
+      root.setAttribute("data-theme", theme);
+      window.localStorage.setItem("theme", theme);
+    }
+  }, [theme, mounted]);
 
   const toggleTheme = useCallback(() => {
     setTheme((current) => (current === "light" ? "dark" : "light"));
