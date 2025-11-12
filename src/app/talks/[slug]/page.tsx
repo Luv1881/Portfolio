@@ -54,15 +54,22 @@ export default function TalkPage({ params }: { params: TalkParams }) {
             <h1 className="text-4xl font-semibold uppercase tracking-[0.3em] md:text-5xl">
               {talk.title}
             </h1>
-            <p className="text-base leading-relaxed text-muted md:text-lg">{talk.abstract}</p>
+            <p className="text-base leading-relaxed text-muted md:text-lg">
+              {talk.abstract}
+            </p>
           </header>
 
           <section className="space-y-4">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">Key Takeaways</h2>
-            <ul className="space-y-3 text-base leading-relaxed text-muted/90">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">
+              Key Takeaways
+            </h2>
+            <ul className="text-muted/90 space-y-3 text-base leading-relaxed">
               {talk.takeaways.map((takeaway) => (
                 <li key={takeaway} className="relative pl-6">
-                  <span className="absolute left-0 top-2 size-2 rounded-full bg-accent" aria-hidden />
+                  <span
+                    className="absolute left-0 top-2 size-2 rounded-full bg-accent"
+                    aria-hidden
+                  />
                   {takeaway}
                 </li>
               ))}
@@ -70,13 +77,15 @@ export default function TalkPage({ params }: { params: TalkParams }) {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">Resources</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">
+              Resources
+            </h2>
             <ul className="flex flex-wrap gap-3 text-sm uppercase tracking-[0.4em] text-accent">
               {talk.resources.map((resource) => (
                 <li key={resource.href}>
                   <a
                     href={resource.href}
-                    className="inline-flex items-center gap-2 rounded-full border border-accent/40 px-4 py-2 transition hover:border-accent hover:bg-accent/10"
+                    className="border-accent/40 hover:bg-accent/10 inline-flex items-center gap-2 rounded-full border px-4 py-2 transition hover:border-accent"
                     target="_blank"
                     rel="noreferrer noopener"
                   >

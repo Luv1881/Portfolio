@@ -47,26 +47,35 @@ export function TypingHero() {
   }, [updateLineWidth]);
 
   return (
-    <main className="bg-background text-text">
+    <main className="relative bg-background text-text">
       <motion.section
-        className="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-12 px-6 text-center"
+        className="relative z-10 mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-12 px-6 text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
-        <h1 className="text-4xl font-semibold uppercase tracking-[0.4em] md:text-5xl">
-          <span
-            className="mx-auto inline-flex items-center justify-center whitespace-nowrap"
-            style={lineWidth ? { width: `${lineWidth}px` } : undefined}
-            aria-live="polite"
-            aria-atomic
-          >
-            <span>{text}</span>
-            <span className="ml-3 inline-block h-[1.2em] w-[2px] bg-accent align-middle animate-caret" />
-          </span>
-        </h1>
+        <div className="relative">
+          <h1 className="gradient-text text-5xl font-bold uppercase tracking-[0.4em] md:text-6xl">
+            <span
+              className="mx-auto inline-flex items-center justify-center whitespace-nowrap"
+              style={lineWidth ? { width: `${lineWidth}px` } : undefined}
+              aria-live="polite"
+              aria-atomic
+            >
+              <span>{text}</span>
+              <span className="animate-caret ml-3 inline-block h-[1.2em] w-[2px] bg-gradient-to-b from-accent via-accent-3 to-accent-2 align-middle" />
+            </span>
+          </h1>
+          {/* Glow effect behind text */}
+          <div className="pointer-events-none absolute inset-0 -z-10 opacity-30 blur-3xl">
+            <div className="animate-glow absolute left-1/2 top-1/2 h-32 w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-accent via-accent-3 to-accent-2" />
+          </div>
+        </div>
         {/* Hidden measurer to lock a stable width and prevent layout shift */}
-        <span ref={measureRef} className={`${measureClasses} absolute -left-[9999px] -top-[9999px]`} />
+        <span
+          ref={measureRef}
+          className={`${measureClasses} absolute -left-[9999px] -top-[9999px]`}
+        />
         <motion.ul
           className="flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-[0.5em] text-muted md:gap-8"
           initial={{ opacity: 0, y: 20 }}
@@ -78,27 +87,39 @@ export function TypingHero() {
               key={href}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.4 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.4,
+                delay: 0.4 + index * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
               <Link
                 href={href}
                 prefetch
-                className="inline-block rounded-full border border-border/40 px-6 py-3 text-text transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:shadow-md hover:scale-105 active:scale-95"
+                className="border-border/40 group relative inline-block overflow-hidden rounded-full border px-6 py-3 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:shadow-[0_0_20px_rgba(0,102,255,0.3)] active:scale-95"
               >
-                {label}
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-accent">
+                  {label}
+                </span>
+                <span className="from-accent/0 via-accent/10 to-accent/0 absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </Link>
             </motion.li>
           ))}
           <motion.li
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.4 + NAV_ITEMS.length * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              duration: 0.4,
+              delay: 0.4 + NAV_ITEMS.length * 0.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             <a
               href={CONTACT_LINK}
-              className="inline-block rounded-full border border-border/40 px-6 py-3 text-text transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:shadow-md hover:scale-105 active:scale-95"
+              className="border-accent/60 bg-accent/10 group relative inline-block overflow-hidden rounded-full border-2 px-6 py-3 font-semibold text-accent transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:bg-accent hover:text-background hover:shadow-[0_0_30px_rgba(0,102,255,0.5)] active:scale-95"
             >
-              Contact
+              <span className="relative z-10">Contact</span>
+              <span className="from-accent-3/20 via-accent/20 to-accent-2/20 animate-shimmer absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </a>
           </motion.li>
         </motion.ul>

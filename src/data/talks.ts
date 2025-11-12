@@ -62,7 +62,10 @@ export const recentTalks: Talk[] = [
     ],
     resources: [
       { label: "Slides", href: "https://talks.luvgupta.com/interfaces-that-listen" },
-      { label: "Workshop Guide", href: "https://notes.luvgupta.com/listening-interfaces" },
+      {
+        label: "Workshop Guide",
+        href: "https://notes.luvgupta.com/listening-interfaces",
+      },
     ],
   },
 ];

@@ -18,8 +18,7 @@ export const featuredProjects: Project[] = [
   {
     slug: "pillbox",
     title: "Pillbox",
-    description:
-      "Your personal medication tracker",
+    description: "Your personal medication tracker",
     year: "2023",
     tags: ["React.js", "Python", "UX"],
     overview:

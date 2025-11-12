@@ -15,14 +15,17 @@ export function SiteHeader() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-[color:var(--header-bg)] py-6 backdrop-blur-md">
+    <header className="border-border/50 sticky top-0 z-40 border-b bg-[color:var(--header-bg)] py-6 shadow-[0_4px_20px_rgba(0,0,0,0.1)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6">
         <div className="flex w-full items-center justify-between gap-6">
           <Link
             href="/"
-            className="transition-all duration-300 ease-out hover:text-accent hover:scale-105 active:scale-95"
+            className="group relative transition-all duration-300 ease-out hover:scale-105 active:scale-95"
           >
-            <span className="block text-sm uppercase tracking-[0.5em] text-text">LUV</span>
+            <span className="gradient-text block text-sm font-bold uppercase tracking-[0.5em]">
+              LUV
+            </span>
+            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-gradient-to-r from-accent via-accent-3 to-accent-2 transition-all duration-300 group-hover:w-full" />
           </Link>
           <ul className="flex items-center gap-8 text-xs uppercase tracking-[0.5em] text-muted">
             {NAV_ITEMS.map(({ href, label }) => (
@@ -30,22 +33,26 @@ export function SiteHeader() {
                 <Link
                   href={href}
                   prefetch
-                  className="inline-block transition-all duration-300 ease-out hover:text-accent hover:scale-105 active:scale-95"
+                  className="group relative inline-block transition-all duration-300 ease-out hover:scale-105 hover:text-accent active:scale-95"
                 >
-                  {label}
+                  <span className="relative">
+                    {label}
+                    <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+                  </span>
                 </Link>
               </li>
             ))}
             <li>
               <a
                 href={CONTACT_LINK}
-                className="flex items-center rounded-full border border-border/40 px-4 py-2 text-text transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:shadow-md hover:scale-105 active:scale-95"
+                className="border-border/40 group relative flex items-center overflow-hidden rounded-full border px-4 py-2 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:text-accent hover:shadow-[0_0_20px_rgba(0,102,255,0.3)] active:scale-95"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                <span className="transition-all duration-300">
+                <span className="relative z-10 transition-all duration-300">
                   {isHovered ? "hello@luvgupta.com" : "Contact"}
                 </span>
+                <span className="from-accent/0 via-accent/10 to-accent/0 absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </a>
             </li>
           </ul>

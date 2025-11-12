@@ -38,7 +38,10 @@ export function PageTransition({ children }: PageTransitionProps) {
       if (typeof router.prefetch !== "function") return;
       try {
         const maybePromise = router.prefetch(route);
-        if (maybePromise && typeof (maybePromise as Promise<unknown>).catch === "function") {
+        if (
+          maybePromise !== undefined &&
+          typeof (maybePromise as Promise<unknown>).catch === "function"
+        ) {
           (maybePromise as Promise<unknown>).catch(() => {});
         }
       } catch {
@@ -50,7 +53,7 @@ export function PageTransition({ children }: PageTransitionProps) {
   // Generate matrix columns on pathname change
   useLayoutEffect(() => {
     if (prefersReduced) return;
-    
+
     // Skip animation on first render
     if (firstRender.current) {
       firstRender.current = false;
@@ -62,7 +65,7 @@ export function PageTransition({ children }: PageTransitionProps) {
     if (previousPathname.current === pathname) {
       return;
     }
-    
+
     previousPathname.current = pathname;
 
     const CHARS = "01アイウエオカキクケコｱｲｳｴｵｶｷｸｹｺﾈﾐﾂ冷";
@@ -88,26 +91,26 @@ export function PageTransition({ children }: PageTransitionProps) {
         delay,
         duration,
         fontSize,
-        sequence
+        sequence,
       };
     });
 
     setColumns(newColumns);
     setMatrixKey((k) => k + 1);
-    
+
     // Hide content immediately when animation starts
     setShowContent(false);
     setIsMatrix(true);
 
     // Calculate longest animation duration
     const maxDuration = newColumns.reduce(
-      (max, c) => Math.max(max, c.delay + c.duration), 
-      0
+      (max, c) => Math.max(max, c.delay + c.duration),
+      0,
     );
     longestDuration.current = maxDuration;
 
     // Show new content at peak of animation (when overlay starts fading)
-    const contentDelay = (maxDuration * 0.5) * 1000;
+    const contentDelay = maxDuration * 0.5 * 1000;
     const contentTimeout = window.setTimeout(() => {
       setShowContent(true);
     }, contentDelay);
@@ -115,9 +118,9 @@ export function PageTransition({ children }: PageTransitionProps) {
     // Hide matrix after animation completes
     const matrixTimeout = window.setTimeout(
       () => setIsMatrix(false),
-      (maxDuration + 0.2) * 1000
+      (maxDuration + 0.2) * 1000,
     );
-    
+
     return () => {
       window.clearTimeout(contentTimeout);
       window.clearTimeout(matrixTimeout);
@@ -125,16 +128,13 @@ export function PageTransition({ children }: PageTransitionProps) {
   }, [pathname, prefersReduced]);
 
   const transitionEase = useMemo(() => [0.22, 1, 0.36, 1] as const, []);
-  
-  const timings = useMemo(
-    () => ({
-      overlayFade: longestDuration.current + 0.25,
-      glitchPrimary: Math.max(longestDuration.current + 0.15, 0.6),
-      glitchSecondary: Math.max(longestDuration.current + 0.25, 0.8),
-      glitchDelay: Math.max(longestDuration.current * 0.25, 0.1),
-    }),
-    [longestDuration.current],
-  );
+
+  const timings = {
+    overlayFade: longestDuration.current + 0.25,
+    glitchPrimary: Math.max(longestDuration.current + 0.15, 0.6),
+    glitchSecondary: Math.max(longestDuration.current + 0.25, 0.8),
+    glitchDelay: Math.max(longestDuration.current * 0.25, 0.1),
+  };
 
   return (
     <>
@@ -155,13 +155,13 @@ export function PageTransition({ children }: PageTransitionProps) {
               className="absolute inset-0 bg-black"
               initial={{ opacity: 1 }}
               animate={{ opacity: [1, 1, 0.4, 0] }}
-              transition={{ 
-                duration: timings.overlayFade, 
-                ease: "easeInOut", 
-                times: [0, 0.6, 0.9, 1] 
+              transition={{
+                duration: timings.overlayFade,
+                ease: "easeInOut",
+                times: [0, 0.6, 0.9, 1],
               }}
             />
-            
+
             {/* Green tint overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#001a08]/35 via-[#062d12]/25 to-[#001a08]/35 mix-blend-screen" />
 
@@ -195,7 +195,7 @@ export function PageTransition({ children }: PageTransitionProps) {
                   const depth = idx / col.sequence.length;
                   const opacity = Math.max(0.1, 1 - depth * 0.9);
                   const isHead = idx < 3;
-                  
+
                   return (
                     <span
                       key={`${col.id}-${idx}`}
@@ -215,12 +215,13 @@ export function PageTransition({ children }: PageTransitionProps) {
                 })}
               </motion.div>
             ))}
-            
+
             {/* CRT scanline effect */}
             <motion.div
-              className="absolute inset-0 pointer-events-none"
+              className="pointer-events-none absolute inset-0"
               style={{
-                backgroundImage: "repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.15) 3px)",
+                backgroundImage:
+                  "repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.15) 3px)",
                 mixBlendMode: "multiply",
               }}
               initial={{ opacity: 0 }}
@@ -236,13 +237,13 @@ export function PageTransition({ children }: PageTransitionProps) {
               transition={{ duration: timings.glitchPrimary, ease: transitionEase }}
             />
             <motion.div
-              className="absolute inset-0 bg-gradient-to-l from-transparent via-[#29f36b]/7 to-transparent"
+              className="via-[#29f36b]/7 absolute inset-0 bg-gradient-to-l from-transparent to-transparent"
               initial={{ x: "100%", opacity: 0.35 }}
               animate={{ x: "-100%", opacity: 0 }}
-              transition={{ 
-                duration: timings.glitchSecondary, 
-                delay: timings.glitchDelay, 
-                ease: transitionEase 
+              transition={{
+                duration: timings.glitchSecondary,
+                delay: timings.glitchDelay,
+                ease: transitionEase,
               }}
             />
           </motion.div>
@@ -254,9 +255,15 @@ export function PageTransition({ children }: PageTransitionProps) {
         {showContent && (
           <motion.div
             key={pathname}
-            initial={prefersReduced ? false : { opacity: 0, filter: "blur(6px)", y: 10 }}
+            initial={
+              prefersReduced ? false : { opacity: 0, filter: "blur(6px)", y: 10 }
+            }
             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            exit={prefersReduced ? { opacity: 0 } : { opacity: 0, filter: "blur(3px)", y: -5 }}
+            exit={
+              prefersReduced
+                ? { opacity: 0 }
+                : { opacity: 0, filter: "blur(3px)", y: -5 }
+            }
             transition={{
               duration: prefersReduced ? 0.2 : 0.4,
               ease: transitionEase,
