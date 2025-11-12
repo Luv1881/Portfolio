@@ -47,13 +47,13 @@ export function ProjectCard({ project }: { project: Project }) {
       animate="rest"
       variants={cardVariants}
     >
-      {/* Gradient glow effect on hover */}
-      <div className="from-accent/0 via-accent-2/0 to-accent-3/0 group-hover:from-accent/5 group-hover:via-accent-2/5 group-hover:to-accent-3/5 pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 transition-all duration-500 group-hover:opacity-100" />
+      {/* Subtle glow effect on hover */}
+      <div className="bg-accent/0 group-hover:bg-accent/3 pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-all duration-500 group-hover:opacity-100" />
 
       <div className="relative z-10 space-y-4">
         <div className="flex items-center gap-3 text-xs uppercase tracking-[0.4em] text-muted">
           <span className="font-semibold text-accent">{project.year}</span>
-          <span className="size-1.5 rounded-full bg-gradient-to-r from-accent via-accent-2 to-accent-3" />
+          <span className="size-1.5 rounded-full bg-accent" />
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <span
@@ -68,7 +68,7 @@ export function ProjectCard({ project }: { project: Project }) {
         <h3 className="text-xl font-medium uppercase leading-tight tracking-[0.3em] text-text">
           <Link
             href={`/projects/${project.slug}`}
-            className="inline-block transition-all duration-300 ease-out hover:bg-gradient-to-r hover:from-accent hover:via-accent-2 hover:to-accent-3 hover:bg-clip-text hover:text-transparent"
+            className="inline-block transition-all duration-300 ease-out hover:text-accent"
           >
             {project.title}
           </Link>

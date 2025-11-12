@@ -207,17 +207,8 @@ body::before {
   }
 
   .gradient-text {
-    background: linear-gradient(
-      135deg,
-      var(--accent) 0%,
-      var(--accent-2) 50%,
-      var(--accent-3) 100%
-    );
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient-shift 6s ease infinite;
+    color: var(--accent);
+    transition: color 0.3s ease;
   }
 
   .glass-effect {

@@ -67,13 +67,14 @@ export function ParticleGrid() {
 
     const initParticles = () => {
       particles = [];
-      const spacing = 50;
+      const spacing = 100; // Increased spacing = fewer particles
       const cols = Math.ceil(canvas.width / spacing);
       const rows = Math.ceil(canvas.height / spacing);
 
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
-          if (Math.random() > 0.5) {
+          if (Math.random() > 0.7) {
+            // Further reduced probability
             particles.push(new Particle(i * spacing, j * spacing));
           }
         }
@@ -130,7 +131,7 @@ export function ParticleGrid() {
     <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 z-0"
-      style={{ opacity: 0.6 }}
+      style={{ opacity: 0.4 }}
     />
   );
 }

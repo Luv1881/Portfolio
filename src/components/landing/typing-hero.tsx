@@ -62,7 +62,7 @@ export function TypingHero() {
             aria-atomic
           >
             <span className="gradient-text">{text}</span>
-            <span className="animate-caret ml-3 inline-block h-[1.2em] w-[2px] bg-gradient-to-b from-accent via-accent-2 to-accent-3 align-middle" />
+            <span className="animate-caret ml-3 inline-block h-[1.2em] w-[2px] bg-accent align-middle" />
           </span>
         </h1>
         {/* Hidden measurer to lock a stable width and prevent layout shift */}
@@ -93,7 +93,7 @@ export function TypingHero() {
                 className="border-border/40 group relative inline-block overflow-hidden rounded-full border px-6 py-3 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:text-accent hover:shadow-soft active:scale-95"
               >
                 <span className="relative z-10">{label}</span>
-                <span className="from-accent/10 via-accent-2/10 to-accent-3/10 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="bg-accent/5 absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </Link>
             </motion.li>
           ))}
@@ -111,7 +111,7 @@ export function TypingHero() {
               className="border-border/40 group relative inline-block overflow-hidden rounded-full border px-6 py-3 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:text-accent hover:shadow-soft active:scale-95"
             >
               <span className="relative z-10">Contact</span>
-              <span className="from-accent/10 via-accent-2/10 to-accent-3/10 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="bg-accent/5 absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </a>
           </motion.li>
         </motion.ul>

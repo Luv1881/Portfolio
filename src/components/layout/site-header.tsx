@@ -27,7 +27,7 @@ export function SiteHeader() {
             <span className="gradient-text block text-sm font-bold uppercase tracking-[0.5em]">
               LUV
             </span>
-            <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-accent via-accent-2 to-accent-3 transition-all duration-300 group-hover:w-full" />
+            <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-accent transition-all duration-300 group-hover:w-full" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -54,7 +54,7 @@ export function SiteHeader() {
                 <span className="relative z-10 transition-all duration-300">
                   {isHovered ? "hello@luvgupta.com" : "Contact"}
                 </span>
-                <span className="from-accent/10 via-accent-2/10 to-accent-3/10 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="bg-accent/5 absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </a>
             </li>
           </ul>
@@ -137,7 +137,7 @@ export function SiteHeader() {
                   className="border-border/40 group relative inline-block overflow-hidden rounded-full border px-6 py-3 text-text transition-all duration-300 hover:scale-105 hover:border-accent hover:text-accent hover:shadow-soft"
                 >
                   <span className="relative z-10">Contact</span>
-                  <span className="from-accent/10 via-accent-2/10 to-accent-3/10 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="bg-accent/5 absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </a>
               </motion.li>
             </motion.ul>

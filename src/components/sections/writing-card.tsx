@@ -15,14 +15,14 @@ export function WritingCard({ entry }: { entry: Writing }) {
         hover: { x: 4, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } },
       }}
     >
-      {/* Gradient glow effect on hover */}
-      <div className="from-accent/0 via-accent-2/0 to-accent-3/0 group-hover:from-accent/5 group-hover:via-accent-2/5 group-hover:to-accent-3/5 pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 transition-all duration-500 group-hover:opacity-100" />
+      {/* Subtle glow effect on hover */}
+      <div className="bg-accent/0 group-hover:bg-accent/3 pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-all duration-500 group-hover:opacity-100" />
 
       <div className="relative z-10 flex-1 space-y-2">
         <h3 className="text-lg font-semibold uppercase tracking-[0.28em] text-text">
           <Link
             href={`/blogs/${entry.slug}`}
-            className="inline-block transition-all duration-300 ease-out hover:bg-gradient-to-r hover:from-accent hover:via-accent-2 hover:to-accent-3 hover:bg-clip-text hover:text-transparent"
+            className="inline-block transition-all duration-300 ease-out hover:text-accent"
           >
             {entry.title}
           </Link>
