@@ -7,7 +7,7 @@ import type { Writing } from "@/data/writing";
 export function WritingCard({ entry }: { entry: Writing }) {
   return (
     <motion.article
-      className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between group py-2"
+      className="group flex flex-col gap-2 py-2 sm:flex-row sm:items-baseline sm:justify-between"
       initial="rest"
       whileHover="hover"
       variants={{
@@ -24,7 +24,7 @@ export function WritingCard({ entry }: { entry: Writing }) {
             {entry.title}
           </Link>
         </h3>
-        <p className="max-w-xl text-sm text-muted transition-colors duration-300 group-hover:text-text/80">
+        <p className="group-hover:text-text/80 max-w-xl text-sm text-muted transition-colors duration-300">
           {entry.summary}
         </p>
       </div>

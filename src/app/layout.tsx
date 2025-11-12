@@ -53,7 +53,7 @@ export default function RootLayout({
         className={cn(
           inter.variable,
           spaceGrotesk.variable,
-          "selection:bg-accent/50 antialiased selection:text-text transition-colors duration-300",
+          "selection:bg-accent/50 antialiased transition-colors duration-300 selection:text-text",
         )}
       >
         <AppShell>{children}</AppShell>

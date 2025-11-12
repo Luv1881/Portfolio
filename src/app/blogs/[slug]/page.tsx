@@ -48,7 +48,9 @@ export default function BlogPostPage({ params }: { params: BlogParams }) {
         </Link>
         <article className="space-y-6">
           <header className="space-y-4">
-            <p className="text-xs uppercase tracking-[0.4em] text-muted">{entry.publishedOn}</p>
+            <p className="text-xs uppercase tracking-[0.4em] text-muted">
+              {entry.publishedOn}
+            </p>
             <h1 className="text-4xl font-semibold uppercase tracking-[0.3em] text-text md:text-5xl">
               {entry.title}
             </h1>

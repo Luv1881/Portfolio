@@ -25,41 +25,54 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="border-border/40 relative isolate flex min-h-[70vh] flex-col justify-between gap-16 overflow-hidden rounded-3xl border bg-surface p-10 shadow-soft md:flex-row md:items-center md:p-16"
+      className="border-border/40 relative isolate flex min-h-[70vh] flex-col justify-between gap-16 overflow-hidden rounded-3xl border bg-gradient-to-br from-surface via-surface to-surface-raised p-10 shadow-soft backdrop-blur-sm md:flex-row md:items-center md:p-16"
     >
+      {/* Ambient glow effects */}
+      <div className="bg-accent/20 pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full blur-3xl" />
+      <div className="bg-accent-3/20 pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full blur-3xl" />
+
       <motion.div
-        className="flex basis-1/2 flex-col gap-8"
+        className="relative z-10 flex basis-1/2 flex-col gap-8"
         initial="hidden"
         animate="visible"
         variants={container}
       >
-        <motion.span variants={item} className="text-sm uppercase tracking-[0.5em] text-muted">
+        <motion.span
+          variants={item}
+          className="gradient-text text-sm font-semibold uppercase tracking-[0.5em]"
+        >
           Product Engineer
         </motion.span>
         <motion.h1
           variants={item}
-          className="text-4xl font-semibold uppercase tracking-[0.25em] text-text md:text-5xl"
+          className="text-4xl font-bold uppercase leading-tight tracking-[0.25em] text-text md:text-5xl"
         >
           Building digital experiences
           <br />
-          with precision and craft.
+          <span className="gradient-text">with precision and craft.</span>
         </motion.h1>
-        <motion.p variants={item} className="max-w-xl text-base leading-relaxed text-muted">
-          I&apos;m Luv Gupta, a product engineer focused on creating exceptional digital experiences.
-          I work with teams to transform ideas into polished, performant products that users love.
+        <motion.p
+          variants={item}
+          className="max-w-xl text-base leading-relaxed text-muted"
+        >
+          I&apos;m Luv Gupta, a product engineer focused on creating exceptional digital
+          experiences. I work with teams to transform ideas into polished, performant
+          products that users love.
         </motion.p>
         <motion.div variants={item} className="flex flex-wrap items-center gap-4">
           <Link
             href="/projects"
-            className="border-accent/60 bg-accent/10 rounded-full border px-6 py-3 text-sm font-medium uppercase tracking-[0.4em] text-accent transition-all hover:bg-accent hover:text-background hover:shadow-lg"
+            className="border-accent/60 bg-accent/10 group relative overflow-hidden rounded-full border-2 px-6 py-3 text-sm font-semibold uppercase tracking-[0.4em] text-accent transition-all hover:scale-105 hover:border-accent hover:bg-accent hover:text-background hover:shadow-[0_0_30px_rgba(0,102,255,0.5)] active:scale-95"
           >
-            View Projects
+            <span className="relative z-10">View Projects</span>
+            <span className="from-accent-3/20 via-accent/20 to-accent-2/20 absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
           <a
             href="mailto:hello@luvgupta.com"
-            className="border-border/60 rounded-full border px-6 py-3 text-sm font-medium uppercase tracking-[0.4em] text-text transition-all hover:border-accent hover:text-accent hover:shadow-lg"
+            className="border-border/60 group relative overflow-hidden rounded-full border px-6 py-3 text-sm font-medium uppercase tracking-[0.4em] text-text transition-all hover:scale-105 hover:border-accent hover:text-accent hover:shadow-[0_0_20px_rgba(0,102,255,0.3)] active:scale-95"
           >
-            Get in Touch
+            <span className="relative z-10">Get in Touch</span>
+            <span className="from-accent/0 via-accent/10 to-accent/0 absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </a>
         </motion.div>
         <motion.ul variants={item} className="flex flex-wrap gap-6 text-sm text-muted">
@@ -69,11 +82,12 @@ export function Hero() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="transition-all hover:text-accent hover:translate-y-[-2px] inline-block"
+                  className="group relative inline-block transition-all hover:translate-y-[-2px] hover:text-accent"
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noreferrer noopener" : undefined}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
                 </a>
               </li>
             );
@@ -81,13 +95,15 @@ export function Hero() {
         </motion.ul>
       </motion.div>
       <motion.div
-        className="relative flex basis-1/2 items-center justify-center"
+        className="relative z-10 flex basis-1/2 items-center justify-center"
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease, delay: 0.2 }}
       >
-        <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,var(--accent-3)_0%,transparent_70%)] blur-3xl" />
-        <Monogram />
+        <div className="animate-glow pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,var(--accent-3)_0%,transparent_70%)] blur-3xl" />
+        <div className="animate-float">
+          <Monogram />
+        </div>
       </motion.div>
     </section>
   );

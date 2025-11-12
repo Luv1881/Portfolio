@@ -25,16 +25,17 @@ export function Section({ id, title, eyebrow, children }: SectionProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-xs uppercase tracking-[0.6em] text-muted font-medium">{eyebrow}</p>
+        <p className="text-xs font-medium uppercase tracking-[0.6em] text-muted">
+          {eyebrow}
+        </p>
         <h2 className="text-2xl font-medium uppercase tracking-[0.35em] text-text md:text-3xl">
           {title}
         </h2>
       </motion.div>
       <div className="relative">
         {children}
-        <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-accent/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="via-accent/5 pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
     </motion.section>
   );
 }
-

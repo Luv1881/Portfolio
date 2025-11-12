@@ -7,7 +7,7 @@ import type { Talk } from "@/data/talks";
 export function TalkCard({ talk }: { talk: Talk }) {
   return (
     <motion.article
-      className="flex items-baseline justify-between gap-4 group py-2"
+      className="group flex items-baseline justify-between gap-4 py-2"
       initial="rest"
       whileHover="hover"
       variants={{
@@ -24,7 +24,7 @@ export function TalkCard({ talk }: { talk: Talk }) {
             {talk.title}
           </Link>
         </h3>
-        <p className="text-sm uppercase tracking-[0.4em] text-muted transition-colors duration-300 group-hover:text-text/80">
+        <p className="group-hover:text-text/80 text-sm uppercase tracking-[0.4em] text-muted transition-colors duration-300">
           {talk.event}
         </p>
       </div>
