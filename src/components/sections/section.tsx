@@ -1,4 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 interface SectionProps {
   id: string;
@@ -9,21 +12,29 @@ interface SectionProps {
 
 export function Section({ id, title, eyebrow, children }: SectionProps) {
   return (
-    <section
+    <motion.section
       id={id}
       className="border-border/30 hover:border-accent/30 group relative isolate overflow-hidden rounded-3xl border bg-surface px-10 py-12 shadow-soft transition-all duration-500 hover:shadow-[0_24px_80px_-60px_rgba(0,102,255,0.25)] md:px-16 md:py-16"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="mb-12 space-y-4">
+      <motion.div
+        className="mb-12 space-y-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+      >
         <p className="text-xs uppercase tracking-[0.6em] text-muted font-medium">{eyebrow}</p>
         <h2 className="text-2xl font-medium uppercase tracking-[0.35em] text-text md:text-3xl">
           {title}
         </h2>
-      </div>
+      </motion.div>
       <div className="relative">
         {children}
         <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-accent/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
-    </section>
+    </motion.section>
   );
 }
 

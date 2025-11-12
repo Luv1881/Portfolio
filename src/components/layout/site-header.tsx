@@ -18,7 +18,10 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-[color:var(--header-bg)] py-6 backdrop-blur-md">
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6">
         <div className="flex w-full items-center justify-between gap-6">
-          <Link href="/" className="transition-all hover:translate-y-[-1px] hover:text-accent">
+          <Link
+            href="/"
+            className="transition-all duration-300 ease-out hover:text-accent hover:scale-105 active:scale-95"
+          >
             <span className="block text-sm uppercase tracking-[0.5em] text-text">LUV</span>
           </Link>
           <ul className="flex items-center gap-8 text-xs uppercase tracking-[0.5em] text-muted">
@@ -27,7 +30,7 @@ export function SiteHeader() {
                 <Link
                   href={href}
                   prefetch
-                  className="inline-block transition-all hover:translate-y-[-1px] hover:text-accent"
+                  className="inline-block transition-all duration-300 ease-out hover:text-accent hover:scale-105 active:scale-95"
                 >
                   {label}
                 </Link>
@@ -36,11 +39,13 @@ export function SiteHeader() {
             <li>
               <a
                 href={CONTACT_LINK}
-                className="flex items-center rounded-full border border-border/40 px-4 py-2 text-text transition-all hover:border-accent hover:text-accent hover:shadow-md"
+                className="flex items-center rounded-full border border-border/40 px-4 py-2 text-text transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:shadow-md hover:scale-105 active:scale-95"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                <span>{isHovered ? "hello@luvgupta.com" : "Contact"}</span>
+                <span className="transition-all duration-300">
+                  {isHovered ? "hello@luvgupta.com" : "Contact"}
+                </span>
               </a>
             </li>
           </ul>
