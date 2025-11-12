@@ -42,19 +42,37 @@ export function PageTransition({ children }: PageTransitionProps) {
     }
   }, []);
 
+  // View Transitions API support is enabled via CSS in globals.css
+  // The browser will automatically use it when available
+
   const transitionEase = [0.22, 1, 0.36, 1] as const;
+
+  // Spring physics for natural motion
+  const spring = {
+    type: "spring",
+    stiffness: 380,
+    damping: 30,
+  } as const;
 
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={pathname}
-        initial={firstRender.current || prefersReduced ? false : { opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -8 }}
-        transition={{
-          duration: prefersReduced ? 0.15 : 0.3,
-          ease: transitionEase,
-        }}
+        initial={
+          firstRender.current || prefersReduced
+            ? false
+            : { opacity: 0, y: 12, scale: 0.98 }
+        }
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -12, scale: 0.98 }}
+        transition={
+          prefersReduced
+            ? { duration: 0.15 }
+            : {
+                ...spring,
+                opacity: { duration: 0.25, ease: transitionEase },
+              }
+        }
         className="flex min-h-screen flex-col"
       >
         {children}
