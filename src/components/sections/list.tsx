@@ -5,7 +5,7 @@ import { cubicBezier, motion } from "framer-motion";
 
 interface ListProps<TItem> {
   items: TItem[];
-  renderItem: (item: TItem) => ReactNode;
+  renderItem: (item: TItem, index: number) => ReactNode;
   getKey?: (item: TItem, index: number) => string | number;
 }
 
@@ -51,7 +51,7 @@ export function SectionList<TItem>({ items, renderItem, getKey }: ListProps<TIte
           className="py-6 first:pt-0 last:pb-0"
           variants={itemVariants}
         >
-          {renderItem(item)}
+          {renderItem(item, index)}
         </motion.div>
       ))}
     </motion.div>

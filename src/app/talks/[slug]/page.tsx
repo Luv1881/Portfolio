@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
 import { getTalkBySlug, recentTalks } from "@/data/talks";
 
 type TalkParams = {
@@ -38,7 +37,6 @@ export default function TalkPage({ params }: { params: TalkParams }) {
 
   return (
     <div className="min-h-screen bg-background text-text">
-      <SiteHeader />
       <main className="mx-auto flex max-w-3xl flex-col gap-12 px-6 py-16 md:gap-16 md:py-24">
         <Link
           href="/talks"

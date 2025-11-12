@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
 import { getWritingBySlug, latestWriting } from "@/data/writing";
 
 type BlogParams = {
@@ -38,7 +37,6 @@ export default function BlogPostPage({ params }: { params: BlogParams }) {
 
   return (
     <div className="min-h-screen bg-background">
-      <SiteHeader />
       <main className="mx-auto flex max-w-3xl flex-col gap-8 px-6 py-16 md:gap-10 md:py-24">
         <Link
           href="/blogs"

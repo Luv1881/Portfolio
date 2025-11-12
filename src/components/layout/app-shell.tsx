@@ -2,9 +2,10 @@
 
 import type { ReactNode } from "react";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { PageTransition } from "@/components/layout/page-transition";
 import { AnimatedBackground } from "@/components/effects/animated-background";
+import { SiteHeader } from "@/components/layout/site-header";
+import { RouteProgress } from "@/components/layout/route-progress";
 
 type AppShellProps = {
   children: ReactNode;
@@ -13,8 +14,9 @@ type AppShellProps = {
 export function AppShell({ children }: AppShellProps) {
   return (
     <ThemeProvider>
+      <RouteProgress />
       <AnimatedBackground />
-      <ThemeToggle />
+      <SiteHeader />
       <PageTransition>{children}</PageTransition>
     </ThemeProvider>
   );
