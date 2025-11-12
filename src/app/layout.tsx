@@ -49,11 +49,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="min-h-full bg-background text-text">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const stored = localStorage.getItem('theme');
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const theme = stored || (prefersDark ? 'dark' : 'light');
+                  document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         className={cn(
           inter.variable,
           spaceGrotesk.variable,
-          "selection:bg-accent/50 antialiased selection:text-text transition-colors duration-300",
+          "selection:bg-accent/50 antialiased transition-colors duration-300 selection:text-text",
         )}
       >
         <AppShell>{children}</AppShell>

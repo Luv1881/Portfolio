@@ -33,7 +33,10 @@ export function Hero() {
         animate="visible"
         variants={container}
       >
-        <motion.span variants={item} className="text-sm uppercase tracking-[0.5em] text-muted">
+        <motion.span
+          variants={item}
+          className="text-sm uppercase tracking-[0.5em] text-muted"
+        >
           Product Engineer
         </motion.span>
         <motion.h1
@@ -44,9 +47,13 @@ export function Hero() {
           <br />
           with precision and craft.
         </motion.h1>
-        <motion.p variants={item} className="max-w-xl text-base leading-relaxed text-muted">
-          I&apos;m Luv Gupta, a product engineer focused on creating exceptional digital experiences.
-          I work with teams to transform ideas into polished, performant products that users love.
+        <motion.p
+          variants={item}
+          className="max-w-xl text-base leading-relaxed text-muted"
+        >
+          I&apos;m Luv Gupta, a product engineer focused on creating exceptional digital
+          experiences. I work with teams to transform ideas into polished, performant
+          products that users love.
         </motion.p>
         <motion.div variants={item} className="flex flex-wrap items-center gap-4">
           <Link
@@ -69,7 +76,7 @@ export function Hero() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="transition-all hover:text-accent hover:translate-y-[-2px] inline-block"
+                  className="inline-block transition-all hover:translate-y-[-2px] hover:text-accent"
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noreferrer noopener" : undefined}
                 >
