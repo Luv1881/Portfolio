@@ -54,20 +54,31 @@ export default function ProjectPage({ params }: { params: ProjectParams }) {
             <h1 className="text-4xl font-semibold uppercase tracking-[0.3em] md:text-5xl">
               {project.title}
             </h1>
-            <p className="text-base leading-relaxed text-muted md:text-lg">{project.description}</p>
+            <p className="text-base leading-relaxed text-muted md:text-lg">
+              {project.description}
+            </p>
           </header>
 
           <section className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">Overview</h2>
-            <p className="text-base leading-relaxed text-muted/90">{project.overview}</p>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">
+              Overview
+            </h2>
+            <p className="text-muted/90 text-base leading-relaxed">
+              {project.overview}
+            </p>
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">Highlights</h2>
-            <ul className="space-y-3 text-base leading-relaxed text-muted/90">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">
+              Highlights
+            </h2>
+            <ul className="text-muted/90 space-y-3 text-base leading-relaxed">
               {project.highlights.map((highlight) => (
                 <li key={highlight} className="relative pl-6">
-                  <span className="absolute left-0 top-2 size-2 rounded-full bg-accent" aria-hidden />
+                  <span
+                    className="absolute left-0 top-2 size-2 rounded-full bg-accent"
+                    aria-hidden
+                  />
                   {highlight}
                 </li>
               ))}
@@ -75,13 +86,15 @@ export default function ProjectPage({ params }: { params: ProjectParams }) {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">Explore</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-muted">
+              Explore
+            </h2>
             <ul className="flex flex-wrap gap-3 text-sm uppercase tracking-[0.4em] text-accent">
               {project.links.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="inline-flex items-center gap-2 rounded-full border border-accent/40 px-4 py-2 transition hover:border-accent hover:bg-accent/10"
+                    className="border-accent/40 hover:bg-accent/10 inline-flex items-center gap-2 rounded-full border px-4 py-2 transition hover:border-accent"
                     target="_blank"
                     rel="noreferrer noopener"
                   >

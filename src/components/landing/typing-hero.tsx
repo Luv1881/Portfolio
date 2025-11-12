@@ -61,12 +61,15 @@ export function TypingHero() {
             aria-live="polite"
             aria-atomic
           >
-            <span>{text}</span>
-            <span className="ml-3 inline-block h-[1.2em] w-[2px] bg-accent align-middle animate-caret" />
+            <span className="gradient-text">{text}</span>
+            <span className="animate-caret ml-3 inline-block h-[1.2em] w-[2px] bg-gradient-to-b from-accent via-accent-2 to-accent-3 align-middle" />
           </span>
         </h1>
         {/* Hidden measurer to lock a stable width and prevent layout shift */}
-        <span ref={measureRef} className={`${measureClasses} absolute -left-[9999px] -top-[9999px]`} />
+        <span
+          ref={measureRef}
+          className={`${measureClasses} absolute -left-[9999px] -top-[9999px]`}
+        />
         <motion.ul
           className="flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-[0.5em] text-muted md:gap-8"
           initial={{ opacity: 0, y: 20 }}
@@ -78,27 +81,37 @@ export function TypingHero() {
               key={href}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.4 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.4,
+                delay: 0.4 + index * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
               <Link
                 href={href}
                 prefetch
-                className="inline-block rounded-full border border-border/40 px-6 py-3 text-text transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:shadow-md hover:scale-105 active:scale-95"
+                className="border-border/40 group relative inline-block overflow-hidden rounded-full border px-6 py-3 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:text-accent hover:shadow-soft active:scale-95"
               >
-                {label}
+                <span className="relative z-10">{label}</span>
+                <span className="from-accent/10 via-accent-2/10 to-accent-3/10 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </Link>
             </motion.li>
           ))}
           <motion.li
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.4 + NAV_ITEMS.length * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              duration: 0.4,
+              delay: 0.4 + NAV_ITEMS.length * 0.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             <a
               href={CONTACT_LINK}
-              className="inline-block rounded-full border border-border/40 px-6 py-3 text-text transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:shadow-md hover:scale-105 active:scale-95"
+              className="border-border/40 group relative inline-block overflow-hidden rounded-full border px-6 py-3 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:text-accent hover:shadow-soft active:scale-95"
             >
-              Contact
+              <span className="relative z-10">Contact</span>
+              <span className="from-accent/10 via-accent-2/10 to-accent-3/10 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </a>
           </motion.li>
         </motion.ul>
