@@ -1,3 +1,5 @@
+"use client";
+
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Section } from "@/components/sections/section";
@@ -49,10 +51,16 @@ export default function ExperiencePage() {
                   <h3 className="text-lg font-medium uppercase tracking-[0.3em] text-text">
                     {item.company}
                   </h3>
-                  <p className="text-sm uppercase tracking-[0.5em] text-muted/90 font-medium">{item.role}</p>
-                  <p className="mt-3 max-w-2xl text-sm text-muted leading-relaxed">{item.summary}</p>
+                  <p className="text-muted/90 text-sm font-medium uppercase tracking-[0.5em]">
+                    {item.role}
+                  </p>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
+                    {item.summary}
+                  </p>
                 </div>
-                <span className="text-xs uppercase tracking-[0.5em] text-muted/80 font-medium mt-1 sm:mt-0">{item.period}</span>
+                <span className="text-muted/80 mt-1 text-xs font-medium uppercase tracking-[0.5em] sm:mt-0">
+                  {item.period}
+                </span>
               </article>
             )}
           />
@@ -62,4 +70,3 @@ export default function ExperiencePage() {
     </div>
   );
 }
-
