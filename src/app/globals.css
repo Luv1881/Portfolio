@@ -222,14 +222,11 @@ body {
     background: linear-gradient(
       135deg,
       var(--accent) 0%,
-      var(--accent-3) 50%,
-      var(--accent-2) 100%
+      color-mix(in srgb, var(--accent) 90%, white) 100%
     );
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient-shift 8s ease infinite;
   }
 
   .glass-effect {

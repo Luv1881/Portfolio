@@ -50,7 +50,7 @@ export function ProjectCard({ project }: { project: Project }) {
       variants={cardVariants}
     >
       {/* Subtle glow on hover */}
-      <div className="from-accent/5 to-accent-3/5 pointer-events-none absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="bg-accent/5 pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       <div className="space-y-3">
         <div className="flex items-center gap-4 text-xs uppercase tracking-[0.5em] text-muted">
@@ -73,14 +73,14 @@ export function ProjectCard({ project }: { project: Project }) {
             className="group/link relative inline-block transition-all duration-300 ease-out hover:text-accent"
           >
             <span className="gradient-text">{project.title}</span>
-            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-gradient-to-r from-accent via-accent-3 to-accent-2 transition-all duration-300 group-hover/link:w-full" />
+            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover/link:w-full" />
           </Link>
         </h3>
         <p className="max-w-2xl text-base leading-relaxed text-muted">
           {project.description}
         </p>
       </div>
-      <motion.div className="border-border/30 bg-surface-muted/40 group-hover:border-accent/50 group-hover:bg-accent/10 hidden rounded-full border transition-all duration-300 ease-out group-hover:shadow-[0_0_20px_rgba(0,102,255,0.3)] md:flex md:h-12 md:w-12 md:items-center md:justify-center">
+      <motion.div className="border-border/30 bg-surface-muted/40 group-hover:border-accent/50 group-hover:bg-accent/10 hidden rounded-full border transition-all duration-300 ease-out group-hover:shadow-[0_0_15px_rgba(0,102,255,0.2)] md:flex md:h-12 md:w-12 md:items-center md:justify-center">
         <motion.svg
           variants={iconVariants}
           width="16"
