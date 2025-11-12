@@ -25,7 +25,7 @@ export function SiteHeader() {
             <span className="gradient-text block text-sm font-bold uppercase tracking-[0.5em]">
               LUV
             </span>
-            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-gradient-to-r from-accent via-accent-3 to-accent-2 transition-all duration-300 group-hover:w-full" />
+            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
           </Link>
           <ul className="flex items-center gap-8 text-xs uppercase tracking-[0.5em] text-muted">
             {NAV_ITEMS.map(({ href, label }) => (
@@ -45,14 +45,14 @@ export function SiteHeader() {
             <li>
               <a
                 href={CONTACT_LINK}
-                className="border-border/40 group relative flex items-center overflow-hidden rounded-full border px-4 py-2 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:text-accent hover:shadow-[0_0_20px_rgba(0,102,255,0.3)] active:scale-95"
+                className="border-border/40 group relative flex items-center overflow-hidden rounded-full border px-4 py-2 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:text-accent hover:shadow-[0_0_15px_rgba(0,102,255,0.2)] active:scale-95"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
                 <span className="relative z-10 transition-all duration-300">
                   {isHovered ? "hello@luvgupta.com" : "Contact"}
                 </span>
-                <span className="from-accent/0 via-accent/10 to-accent/0 absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="bg-accent/5 absolute inset-0 -z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </a>
             </li>
           </ul>

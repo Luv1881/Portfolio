@@ -14,7 +14,7 @@ export function Section({ id, title, eyebrow, children }: SectionProps) {
   return (
     <motion.section
       id={id}
-      className="border-border/30 hover:border-accent/30 group relative isolate overflow-hidden rounded-3xl border bg-surface px-10 py-12 shadow-soft transition-all duration-500 hover:shadow-[0_24px_80px_-60px_rgba(0,102,255,0.25)] md:px-16 md:py-16"
+      className="border-border/30 hover:border-accent/30 group relative isolate overflow-hidden rounded-3xl border bg-surface px-10 py-12 shadow-soft transition-all duration-500 hover:shadow-[0_20px_40px_-20px_rgba(0,102,255,0.2)] md:px-16 md:py-16"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}

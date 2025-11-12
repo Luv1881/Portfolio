@@ -27,9 +27,8 @@ export function Hero() {
       id="hero"
       className="border-border/40 relative isolate flex min-h-[70vh] flex-col justify-between gap-16 overflow-hidden rounded-3xl border bg-gradient-to-br from-surface via-surface to-surface-raised p-10 shadow-soft backdrop-blur-sm md:flex-row md:items-center md:p-16"
     >
-      {/* Ambient glow effects */}
-      <div className="bg-accent/20 pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full blur-3xl" />
-      <div className="bg-accent-3/20 pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full blur-3xl" />
+      {/* Ambient glow effect */}
+      <div className="bg-accent/15 pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
 
       <motion.div
         className="relative z-10 flex basis-1/2 flex-col gap-8"
@@ -62,17 +61,16 @@ export function Hero() {
         <motion.div variants={item} className="flex flex-wrap items-center gap-4">
           <Link
             href="/projects"
-            className="border-accent/60 bg-accent/10 group relative overflow-hidden rounded-full border-2 px-6 py-3 text-sm font-semibold uppercase tracking-[0.4em] text-accent transition-all hover:scale-105 hover:border-accent hover:bg-accent hover:text-background hover:shadow-[0_0_30px_rgba(0,102,255,0.5)] active:scale-95"
+            className="border-accent/60 bg-accent/10 group relative overflow-hidden rounded-full border-2 px-6 py-3 text-sm font-semibold uppercase tracking-[0.4em] text-accent transition-all hover:scale-105 hover:border-accent hover:bg-accent hover:text-background hover:shadow-[0_0_20px_rgba(0,102,255,0.4)] active:scale-95"
           >
             <span className="relative z-10">View Projects</span>
-            <span className="from-accent-3/20 via-accent/20 to-accent-2/20 absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
           <a
             href="mailto:hello@luvgupta.com"
-            className="border-border/60 group relative overflow-hidden rounded-full border px-6 py-3 text-sm font-medium uppercase tracking-[0.4em] text-text transition-all hover:scale-105 hover:border-accent hover:text-accent hover:shadow-[0_0_20px_rgba(0,102,255,0.3)] active:scale-95"
+            className="border-border/60 group relative overflow-hidden rounded-full border px-6 py-3 text-sm font-medium uppercase tracking-[0.4em] text-text transition-all hover:scale-105 hover:border-accent hover:text-accent hover:shadow-[0_0_15px_rgba(0,102,255,0.2)] active:scale-95"
           >
             <span className="relative z-10">Get in Touch</span>
-            <span className="from-accent/0 via-accent/10 to-accent/0 absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <span className="bg-accent/5 absolute inset-0 -z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </a>
         </motion.div>
         <motion.ul variants={item} className="flex flex-wrap gap-6 text-sm text-muted">
@@ -100,7 +98,7 @@ export function Hero() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease, delay: 0.2 }}
       >
-        <div className="animate-glow pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,var(--accent-3)_0%,transparent_70%)] blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,var(--accent)_0%,transparent_70%)] opacity-30 blur-3xl" />
         <div className="animate-float">
           <Monogram />
         </div>

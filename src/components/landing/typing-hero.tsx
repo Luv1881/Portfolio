@@ -21,8 +21,7 @@ export function TypingHero() {
   const [lineWidth, setLineWidth] = useState<number>(0);
 
   const measureClasses = useMemo(
-    () =>
-      "text-4xl font-semibold uppercase tracking-[0.4em] md:text-5xl whitespace-nowrap",
+    () => "text-4xl font-bold uppercase tracking-[0.3em] md:text-5xl whitespace-nowrap",
     [],
   );
 
@@ -54,21 +53,25 @@ export function TypingHero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="relative">
-          <h1 className="gradient-text text-5xl font-bold uppercase tracking-[0.4em] md:text-6xl">
+        <div className="relative flex w-full items-center justify-center">
+          <h1 className="gradient-text text-4xl font-bold uppercase tracking-[0.3em] md:text-5xl">
             <span
-              className="mx-auto inline-flex items-center justify-center whitespace-nowrap"
-              style={lineWidth ? { width: `${lineWidth}px` } : undefined}
+              className="inline-flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap"
+              style={
+                lineWidth
+                  ? { width: `${lineWidth}px`, maxWidth: "90vw" }
+                  : { maxWidth: "90vw" }
+              }
               aria-live="polite"
               aria-atomic
             >
-              <span>{text}</span>
-              <span className="animate-caret ml-3 inline-block h-[1.2em] w-[2px] bg-gradient-to-b from-accent via-accent-3 to-accent-2 align-middle" />
+              <span className="overflow-hidden text-ellipsis">{text}</span>
+              <span className="animate-caret ml-2 inline-block h-[1.2em] w-[2px] flex-shrink-0 bg-accent align-middle" />
             </span>
           </h1>
           {/* Glow effect behind text */}
-          <div className="pointer-events-none absolute inset-0 -z-10 opacity-30 blur-3xl">
-            <div className="animate-glow absolute left-1/2 top-1/2 h-32 w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-accent via-accent-3 to-accent-2" />
+          <div className="pointer-events-none absolute inset-0 -z-10 opacity-20 blur-3xl">
+            <div className="absolute left-1/2 top-1/2 h-32 w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent" />
           </div>
         </div>
         {/* Hidden measurer to lock a stable width and prevent layout shift */}
@@ -96,12 +99,12 @@ export function TypingHero() {
               <Link
                 href={href}
                 prefetch
-                className="border-border/40 group relative inline-block overflow-hidden rounded-full border px-6 py-3 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:shadow-[0_0_20px_rgba(0,102,255,0.3)] active:scale-95"
+                className="border-border/40 group relative inline-block overflow-hidden rounded-full border px-6 py-3 text-text transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:shadow-[0_0_15px_rgba(0,102,255,0.2)] active:scale-95"
               >
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-accent">
                   {label}
                 </span>
-                <span className="from-accent/0 via-accent/10 to-accent/0 absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="bg-accent/5 absolute inset-0 -z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </Link>
             </motion.li>
           ))}
@@ -116,10 +119,9 @@ export function TypingHero() {
           >
             <a
               href={CONTACT_LINK}
-              className="border-accent/60 bg-accent/10 group relative inline-block overflow-hidden rounded-full border-2 px-6 py-3 font-semibold text-accent transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:bg-accent hover:text-background hover:shadow-[0_0_30px_rgba(0,102,255,0.5)] active:scale-95"
+              className="border-accent/60 bg-accent/10 group relative inline-block overflow-hidden rounded-full border-2 px-6 py-3 font-semibold text-accent transition-all duration-300 ease-out hover:scale-105 hover:border-accent hover:bg-accent hover:text-background hover:shadow-[0_0_20px_rgba(0,102,255,0.4)] active:scale-95"
             >
               <span className="relative z-10">Contact</span>
-              <span className="from-accent-3/20 via-accent/20 to-accent-2/20 animate-shimmer absolute inset-0 -z-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </a>
           </motion.li>
         </motion.ul>

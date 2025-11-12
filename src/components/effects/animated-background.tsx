@@ -1,61 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 export function AnimatedBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {/* Primary gradient orb */}
-      <motion.div
-        className="absolute -left-1/4 -top-1/4 h-[600px] w-[600px] rounded-full opacity-20 blur-3xl"
+      {/* Single subtle gradient orb - using CSS animation instead of JS */}
+      <div
+        className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10 blur-3xl"
         style={{
           background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)",
-        }}
-        animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* Secondary gradient orb */}
-      <motion.div
-        className="absolute -right-1/4 top-1/3 h-[500px] w-[500px] rounded-full opacity-20 blur-3xl"
-        style={{
-          background: "radial-gradient(circle, var(--accent-3) 0%, transparent 70%)",
-        }}
-        animate={{
-          x: [0, -80, 0],
-          y: [0, 80, 0],
-          scale: [1, 1.15, 1],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* Tertiary gradient orb */}
-      <motion.div
-        className="absolute bottom-0 left-1/3 h-[450px] w-[450px] rounded-full opacity-15 blur-3xl"
-        style={{
-          background: "radial-gradient(circle, var(--accent-2) 0%, transparent 70%)",
-        }}
-        animate={{
-          x: [0, 60, 0],
-          y: [0, -60, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
+          animation: "subtle-float 30s ease-in-out infinite",
         }}
       />
 
@@ -68,6 +21,18 @@ export function AnimatedBackground() {
           backgroundSize: "80px 80px",
         }}
       />
+
+      <style jsx>{`
+        @keyframes subtle-float {
+          0%,
+          100% {
+            transform: translate(-50%, -50%) scale(1);
+          }
+          50% {
+            transform: translate(-50%, -50%) scale(1.05);
+          }
+        }
+      `}</style>
     </div>
   );
 }
