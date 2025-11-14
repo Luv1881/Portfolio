@@ -24,7 +24,20 @@ export function DigitalClock() {
 
   // Get date info
   const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const months = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+  ];
   const dayName = days[time.getDay()];
   const monthName = months[time.getMonth()];
   const date = time.getDate();
@@ -80,7 +93,7 @@ export function DigitalClock() {
         {/* Date Display */}
         <div className="flex items-center justify-center gap-2 border-t border-[var(--border)] pt-3">
           {/* Day of week */}
-          <div className="rounded-md border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-2 py-1 text-xs font-bold uppercase tracking-widest text-[var(--accent)]">
+          <div className="border-[var(--accent)]/30 bg-[var(--accent)]/10 rounded-md border px-2 py-1 text-xs font-bold uppercase tracking-widest text-[var(--accent)]">
             {dayName}
           </div>
 

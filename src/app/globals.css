@@ -282,6 +282,29 @@ body {
     text-shadow: 0 0 80px rgba(0, 102, 255, 0.5);
   }
 
+  @keyframes holographic-shimmer {
+    0% {
+      filter: hue-rotate(0deg) brightness(1);
+    }
+    25% {
+      filter: hue-rotate(10deg) brightness(1.1);
+    }
+    50% {
+      filter: hue-rotate(0deg) brightness(1);
+    }
+    75% {
+      filter: hue-rotate(-10deg) brightness(1.1);
+    }
+    100% {
+      filter: hue-rotate(0deg) brightness(1);
+    }
+  }
+
+  .holographic-text {
+    animation: holographic-shimmer 6s ease-in-out infinite;
+    position: relative;
+  }
+
   .glass-effect {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
