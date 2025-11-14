@@ -272,45 +272,20 @@ export function TypingHero() {
           >
             <h1 className="text-5xl font-bold uppercase leading-tight tracking-[0.3em] text-text sm:text-6xl md:text-7xl lg:text-8xl">
               <span
-                className="inline-flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap"
+                className="inline-flex items-center justify-center whitespace-nowrap"
                 style={
                   lineWidth
-                    ? { width: `${lineWidth}px`, maxWidth: "90vw" }
-                    : { maxWidth: "90vw" }
+                    ? { width: `${lineWidth}px`, maxWidth: "90vw", minHeight: "1.2em" }
+                    : { maxWidth: "90vw", minHeight: "1.2em" }
                 }
                 aria-live="polite"
                 aria-atomic
               >
-                {/* Chromatic aberration layers */}
-                <span className="relative inline-block">
-                  <span className="holographic-text gradient-text-premium overflow-hidden text-ellipsis">
-                    {text}
-                  </span>
-                  {/* Red channel offset */}
-                  <span
-                    className="pointer-events-none absolute left-0 top-0 overflow-hidden text-ellipsis opacity-40"
-                    style={{
-                      color: "#ff0066",
-                      transform: "translate(-1px, -1px)",
-                      mixBlendMode: "screen",
-                    }}
-                  >
-                    {text}
-                  </span>
-                  {/* Blue channel offset */}
-                  <span
-                    className="pointer-events-none absolute left-0 top-0 overflow-hidden text-ellipsis opacity-40"
-                    style={{
-                      color: "#00ccff",
-                      transform: "translate(1px, 1px)",
-                      mixBlendMode: "screen",
-                    }}
-                  >
-                    {text}
-                  </span>
+                <span className="gradient-text-premium">
+                  {text}
                 </span>
                 <motion.span
-                  className="animate-caret ml-3 inline-block h-[1.2em] w-[3px] flex-shrink-0 bg-accent align-middle"
+                  className="animate-caret ml-3 inline-block h-[1.2em] w-[3px] flex-shrink-0 bg-accent"
                   animate={{
                     boxShadow: [
                       "0 0 10px rgba(0,102,255,0.8)",

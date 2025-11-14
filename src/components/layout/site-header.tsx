@@ -34,7 +34,7 @@ export function SiteHeader() {
             <span className="gradient-text-premium block text-base font-bold uppercase tracking-[0.5em] drop-shadow-[0_0_10px_rgba(0,102,255,0.3)]">
               LUV
             </span>
-            <span className="absolute -bottom-1 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-accent via-accent-3 to-accent-2 shadow-[0_0_8px_rgba(0,102,255,0.5)] transition-all duration-300 group-hover:w-full" />
+            <span className="absolute -bottom-1 left-0 h-[3px] w-0 rounded-full bg-accent shadow-[0_0_8px_rgba(0,102,255,0.5)] transition-all duration-300 group-hover:w-full" />
           </Link>
         </MagneticElement>
 
@@ -50,7 +50,7 @@ export function SiteHeader() {
                 >
                   <span className="relative">
                     {label}
-                    <span className="absolute -bottom-1 left-0 h-[2px] w-0 rounded-full bg-gradient-to-r from-accent to-accent-3 shadow-[0_0_8px_rgba(0,102,255,0.5)] transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 h-[2px] w-0 rounded-full bg-accent shadow-[0_0_8px_rgba(0,102,255,0.5)] transition-all duration-300 group-hover:w-full" />
                   </span>
                 </Link>
               </MagneticElement>
