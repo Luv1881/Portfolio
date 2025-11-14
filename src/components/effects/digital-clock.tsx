@@ -32,102 +32,47 @@ export function DigitalClock() {
 
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-[var(--border)] backdrop-blur-xl"
-      style={{
-        background: "linear-gradient(135deg, rgba(17, 17, 17, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%)",
-        boxShadow: `
-          0 8px 32px rgba(0, 102, 255, 0.15),
-          0 0 0 1px rgba(255, 255, 255, 0.05) inset,
-          0 0 60px rgba(0, 204, 255, 0.1)
-        `,
-      }}
+      className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-black/40 backdrop-blur-xl"
       aria-label={`Current time: ${time.toLocaleTimeString()}, ${dayName} ${monthName} ${date}, ${year}`}
       role="timer"
     >
-      {/* Animated gradient background orbs */}
-      <div
-        className="pointer-events-none absolute -left-8 -top-8 h-32 w-32 rounded-full opacity-20 blur-3xl"
-        style={{
-          background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)",
-          animation: "glow-pulse 4s ease-in-out infinite",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute -bottom-8 -right-8 h-32 w-32 rounded-full opacity-20 blur-3xl"
-        style={{
-          background: "radial-gradient(circle, var(--accent-3) 0%, transparent 70%)",
-          animation: "glow-pulse 4s ease-in-out infinite 2s",
-        }}
-      />
-
       <div className="relative z-10 flex flex-col gap-3 px-6 py-4">
         {/* Time Display */}
         <div className="flex items-center justify-center gap-1">
           {/* Hours */}
-          <div
-            className="relative font-mono text-4xl font-bold tabular-nums leading-none tracking-wider"
-            style={{
-              background: `linear-gradient(135deg, var(--accent) 0%, var(--accent-3) 100%)`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter: "drop-shadow(0 0 20px rgba(0, 102, 255, 0.5))",
-            }}
-          >
+          <div className="relative font-mono text-4xl font-bold tabular-nums leading-none tracking-wider text-white">
             {formattedHours}
           </div>
 
           {/* Colon separator with pulse animation */}
           <div
-            className="relative mx-0.5 text-3xl font-bold leading-none"
+            className="relative mx-0.5 text-3xl font-bold leading-none text-white"
             style={{
-              color: "var(--accent-2)",
               opacity: seconds % 2 === 0 ? 1 : 0.3,
               transition: "opacity 0.3s ease-in-out",
-              filter: "drop-shadow(0 0 10px var(--accent-2))",
             }}
           >
             :
           </div>
 
           {/* Minutes */}
-          <div
-            className="relative font-mono text-4xl font-bold tabular-nums leading-none tracking-wider"
-            style={{
-              background: `linear-gradient(135deg, var(--accent-3) 0%, var(--accent-2) 100%)`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter: "drop-shadow(0 0 20px rgba(0, 204, 255, 0.5))",
-            }}
-          >
+          <div className="relative font-mono text-4xl font-bold tabular-nums leading-none tracking-wider text-white">
             {formattedMinutes}
           </div>
 
           {/* Colon separator */}
           <div
-            className="relative mx-0.5 text-3xl font-bold leading-none"
+            className="relative mx-0.5 text-3xl font-bold leading-none text-white"
             style={{
-              color: "var(--accent-2)",
               opacity: seconds % 2 === 0 ? 1 : 0.3,
               transition: "opacity 0.3s ease-in-out",
-              filter: "drop-shadow(0 0 10px var(--accent-2))",
             }}
           >
             :
           </div>
 
           {/* Seconds */}
-          <div
-            className="relative font-mono text-4xl font-bold tabular-nums leading-none tracking-wider"
-            style={{
-              background: `linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%)`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter: "drop-shadow(0 0 20px rgba(255, 0, 102, 0.5))",
-            }}
-          >
+          <div className="relative font-mono text-4xl font-bold tabular-nums leading-none tracking-wider text-white">
             {formattedSeconds}
           </div>
         </div>
@@ -135,41 +80,15 @@ export function DigitalClock() {
         {/* Date Display */}
         <div className="flex items-center justify-center gap-2 border-t border-[var(--border)] pt-3">
           {/* Day of week */}
-          <div
-            className="rounded-md px-2 py-1 text-xs font-bold uppercase tracking-widest"
-            style={{
-              background: "rgba(0, 102, 255, 0.1)",
-              color: "var(--accent)",
-              border: "1px solid rgba(0, 102, 255, 0.2)",
-            }}
-          >
+          <div className="rounded-md border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-2 py-1 text-xs font-bold uppercase tracking-widest text-[var(--accent)]">
             {dayName}
           </div>
 
           {/* Full date */}
-          <div
-            className="font-mono text-sm font-medium tabular-nums tracking-wide"
-            style={{
-              color: "var(--muted)",
-            }}
-          >
+          <div className="font-mono text-sm font-medium tabular-nums tracking-wide text-[var(--muted)]">
             {monthName} {date.toString().padStart(2, "0")}, {year}
           </div>
         </div>
-
-        {/* Decorative bottom accent line */}
-        <div
-          className="absolute bottom-0 left-0 h-0.5 w-full"
-          style={{
-            background: `linear-gradient(90deg,
-              transparent 0%,
-              var(--accent) 20%,
-              var(--accent-3) 50%,
-              var(--accent-2) 80%,
-              transparent 100%)`,
-            opacity: 0.6,
-          }}
-        />
       </div>
     </div>
   );
