@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const PHRASES = ["Luv Gupta", "Software Engineer"] as const;
@@ -13,6 +13,22 @@ export function TypingIntro() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const measureRef = useRef<HTMLSpanElement>(null);
+  const [maxWidth, setMaxWidth] = useState<number>(0);
+
+  useLayoutEffect(() => {
+    if (!measureRef.current) return;
+    const el = measureRef.current;
+    let max = 0;
+    for (const phrase of PHRASES) {
+      el.textContent = phrase;
+      const width = el.offsetWidth;
+      if (width > max) max = width;
+    }
+    el.textContent = "";
+    // Add buffer for caret
+    setMaxWidth(max + 8);
+  }, []);
 
   useEffect(() => {
     const currentPhrase = PHRASES[phraseIndex % PHRASES.length];
@@ -57,11 +73,22 @@ export function TypingIntro() {
       <div className="space-y-4">
         <p className="text-sm uppercase tracking-[0.5em] text-muted">hello.</p>
         <h1 className="text-5xl font-semibold uppercase tracking-[0.3em] text-text md:text-6xl">
-          {displayName}
-          <span className={`ml-2 inline-block h-10 w-[2px] bg-accent ${caretClass}`}>
-            {" "}
+          <span
+            className="inline-flex items-center justify-center"
+            style={maxWidth ? { width: `${maxWidth}px`, minWidth: `${maxWidth}px` } : undefined}
+          >
+            <span>{displayName}</span>
+            <span className={`ml-2 inline-block h-10 w-[2px] flex-shrink-0 bg-accent ${caretClass}`}>
+              {" "}
+            </span>
           </span>
         </h1>
+        {/* Hidden measurer to calculate stable width */}
+        <span
+          ref={measureRef}
+          className="absolute -left-[9999px] -top-[9999px] text-5xl font-semibold uppercase tracking-[0.3em] md:text-6xl"
+          aria-hidden="true"
+        />
       </div>
       <div className="flex flex-col gap-4 text-sm uppercase tracking-[0.3em] text-muted md:flex-row">
         {links.map((link) => (
