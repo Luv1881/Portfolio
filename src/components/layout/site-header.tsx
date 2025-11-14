@@ -24,50 +24,49 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="border-border/50 sticky top-0 z-50 border-b bg-[color:var(--header-bg)] py-3 shadow-[0_4px_20px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-all duration-300">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6">
-        <MagneticElement strength={0.2}>
+    <header className="border-border/30 sticky top-0 z-50 border-b bg-[color:var(--header-bg)] py-4 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-2xl transition-all duration-300">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-8">
+        <MagneticElement strength={0.3}>
           <Link
             href="/"
             className="group relative transition-all duration-300 ease-out hover:scale-110 active:scale-95"
           >
-            <span className="gradient-text block text-sm font-bold uppercase tracking-[0.5em]">
+            <span className="gradient-text-premium block text-base font-bold uppercase tracking-[0.5em] drop-shadow-[0_0_10px_rgba(0,102,255,0.3)]">
               LUV
             </span>
-            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+            <span className="absolute -bottom-1 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-accent via-accent-3 to-accent-2 shadow-[0_0_8px_rgba(0,102,255,0.5)] transition-all duration-300 group-hover:w-full" />
           </Link>
         </MagneticElement>
 
-        <ul className="flex items-center gap-6 text-xs uppercase tracking-[0.5em] text-muted">
+        <ul className="flex items-center gap-8 text-xs uppercase tracking-[0.5em] text-muted">
           {NAV_ITEMS.map(({ href, label }) => (
             <li key={href}>
-              <MagneticElement strength={0.15}>
+              <MagneticElement strength={0.2}>
                 <Link
                   href={href}
                   prefetch
                   onMouseEnter={() => handleNavHover(href)}
-                  className="group relative inline-block transition-all duration-300 ease-out hover:scale-110 hover:text-accent active:scale-95"
+                  className="group relative inline-block font-medium transition-all duration-300 ease-out hover:scale-110 hover:text-accent active:scale-95"
                 >
                   <span className="relative">
                     {label}
-                    <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 h-[2px] w-0 rounded-full bg-gradient-to-r from-accent to-accent-3 shadow-[0_0_8px_rgba(0,102,255,0.5)] transition-all duration-300 group-hover:w-full" />
                   </span>
                 </Link>
               </MagneticElement>
             </li>
           ))}
           <li>
-            <MagneticElement strength={0.2}>
+            <MagneticElement strength={0.25}>
               <a
                 href={CONTACT_LINK}
-                className="border-border/40 group relative flex items-center overflow-hidden rounded-full border px-4 py-1.5 text-text transition-all duration-300 ease-out hover:scale-110 hover:border-accent hover:text-accent hover:shadow-[0_0_20px_rgba(0,102,255,0.3)] active:scale-95"
+                className="border-accent/40 bg-accent/5 group relative flex items-center overflow-hidden rounded-full border-2 px-5 py-2 font-semibold text-accent backdrop-blur-xl transition-all duration-300 ease-out hover:scale-110 hover:border-accent hover:bg-accent hover:text-background hover:shadow-[0_0_30px_rgba(0,102,255,0.4)] active:scale-95"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
                 <span className="relative z-10 transition-all duration-300">
                   {isHovered ? "hello@luvgupta.com" : "Contact"}
                 </span>
-                <span className="bg-accent/5 absolute inset-0 -z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </a>
             </MagneticElement>
           </li>
