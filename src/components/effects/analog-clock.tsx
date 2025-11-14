@@ -54,15 +54,15 @@ export function AnalogClock() {
             key={i}
             className="absolute"
             style={{
-              transform: `rotate(${angle}deg) translateY(-22px)`,
-              transformOrigin: "center 22px",
+              transform: `rotate(${angle}deg) translateY(-26px)`,
+              transformOrigin: "center 26px",
             }}
           >
             <div
               className="rounded-full"
               style={{
                 width: isMainHour ? "2px" : "1px",
-                height: isMainHour ? "4px" : "2px",
+                height: isMainHour ? "5px" : "3px",
                 backgroundColor: "var(--muted)",
                 opacity: isMainHour ? 0.6 : 0.3,
               }}
@@ -76,7 +76,7 @@ export function AnalogClock() {
         className="absolute origin-bottom transition-transform duration-500"
         style={{
           width: "2px",
-          height: "16px",
+          height: "19px",
           backgroundColor: "var(--text)",
           transform: `rotate(${hourAngle}deg)`,
           bottom: "50%",
@@ -89,7 +89,7 @@ export function AnalogClock() {
         className="absolute origin-bottom transition-transform duration-500"
         style={{
           width: "1.5px",
-          height: "22px",
+          height: "25px",
           backgroundColor: "var(--accent)",
           transform: `rotate(${minuteAngle}deg)`,
           bottom: "50%",
@@ -102,7 +102,7 @@ export function AnalogClock() {
         className="absolute origin-bottom"
         style={{
           width: "1px",
-          height: "24px",
+          height: "27px",
           backgroundColor: "var(--accent-2)",
           transform: `rotate(${secondAngle}deg)`,
           bottom: "50%",
