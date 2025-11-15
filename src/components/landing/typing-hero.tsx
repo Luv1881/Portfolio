@@ -47,8 +47,8 @@ export function TypingHero() {
   }, [updateLineWidth]);
 
   return (
-    <main className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-[#0a0a0a] text-text">
-      {/* Main Content - Perfectly Centered */}
+    <main className="relative flex h-screen w-full items-center justify-center overflow-hidden text-text">
+      {/* Main Content - Perfectly Centered with z-index above stars */}
       <motion.section
         className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-12 px-6 text-center sm:gap-16"
         initial={{ opacity: 0, y: 20 }}
@@ -85,8 +85,13 @@ export function TypingHero() {
                 className="inline-flex items-center justify-center whitespace-nowrap"
                 style={
                   lineWidth
-                    ? { width: `${lineWidth}px`, maxWidth: "90vw", minHeight: "1.2em" }
-                    : { maxWidth: "90vw", minHeight: "1.2em" }
+                    ? {
+                        width: `${lineWidth}px`,
+                        maxWidth: "90vw",
+                        minHeight: "1.2em",
+                        height: "1.2em",
+                      }
+                    : { maxWidth: "90vw", minHeight: "1.2em", height: "1.2em" }
                 }
                 aria-live="polite"
                 aria-atomic

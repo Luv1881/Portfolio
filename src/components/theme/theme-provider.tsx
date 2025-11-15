@@ -21,17 +21,8 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 function getInitialTheme(): Theme {
-  if (typeof window === "undefined") {
-    return "dark";
-  }
-
-  const storedTheme = window.localStorage.getItem("theme");
-  if (storedTheme === "light" || storedTheme === "dark") {
-    return storedTheme;
-  }
-
-  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-  return prefersLight ? "light" : "dark";
+  // Always return dark mode - light mode is disabled
+  return "dark";
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -39,12 +30,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.setAttribute("data-theme", theme);
-    window.localStorage.setItem("theme", theme);
+    root.setAttribute("data-theme", "dark");
+    // Lock to dark mode in localStorage
+    window.localStorage.setItem("theme", "dark");
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((current) => (current === "light" ? "dark" : "light"));
+    // Theme toggle disabled - always stay in dark mode
+    setTheme("dark");
   }, []);
 
   const value = useMemo(

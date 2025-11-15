@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { MagneticElement } from "@/components/effects/magnetic-element";
 
 export const NAV_ITEMS = [
@@ -69,9 +68,6 @@ export function SiteHeader() {
                 </span>
               </a>
             </MagneticElement>
-          </li>
-          <li>
-            <ThemeToggle className="!relative !right-auto !top-auto !z-auto" />
           </li>
         </ul>
       </nav>
