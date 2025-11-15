@@ -1,81 +1,78 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 export function AnimatedBackground() {
-  const [shootingStars, setShootingStars] = useState<
-    Array<{ id: number; x: number; y: number; delay: number }>
-  >([]);
-
-  // Generate random stars
-  const stars = Array.from({ length: 200 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 0.5,
-    delay: Math.random() * 3,
-    duration: Math.random() * 2 + 2,
-  }));
-
-  // Generate shooting stars periodically
-  useEffect(() => {
-    const generateShootingStars = () => {
-      const numStars = Math.floor(Math.random() * 2) + 2; // 2-3 shooting stars
-      const newShootingStars = Array.from({ length: numStars }, (_, i) => ({
-        id: Date.now() + i,
+  // Generate random stars once - memoized to prevent regeneration
+  const stars = useMemo(
+    () =>
+      Array.from({ length: 200 }, (_, i) => ({
+        id: i,
         x: Math.random() * 100,
-        y: Math.random() * 50, // Start in upper half of screen
-        delay: i * 0.3, // Stagger the stars slightly
-      }));
+        y: Math.random() * 100,
+        size: Math.random() * 2 + 0.5,
+        delay: Math.random() * 3,
+        duration: Math.random() * 2 + 2,
+      })),
+    [],
+  );
 
-      setShootingStars(newShootingStars);
-
-      // Clear shooting stars after animation completes
-      setTimeout(() => {
-        setShootingStars([]);
-      }, 2000);
-    };
-
-    // Generate shooting stars every 8-10 seconds
-    const interval = setInterval(generateShootingStars, 8000 + Math.random() * 2000);
-
-    return () => clearInterval(interval);
-  }, []);
+  // Generate a fixed set of shooting stars with staggered delays
+  const shootingStars = useMemo(
+    () => [
+      {
+        id: 1,
+        startX: -10,
+        startY: 20,
+        delay: 0,
+      },
+      {
+        id: 2,
+        startX: -10,
+        startY: 60,
+        delay: 4,
+      },
+    ],
+    [],
+  );
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
-      {/* Twinkling stars */}
-      {stars.map((star) => (
-        <div
-          key={star.id}
-          className="absolute rounded-full bg-white"
-          style={{
-            left: `${star.x}%`,
-            top: `${star.y}%`,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            animation: `twinkle ${star.duration}s ease-in-out ${star.delay}s infinite`,
-            opacity: 0.3,
-          }}
-        />
-      ))}
+    <>
+      {/* Static star field layer - z-index: 0 */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#0a0a0a]">
+        {stars.map((star) => (
+          <div
+            key={star.id}
+            className="absolute rounded-full bg-white will-change-[opacity]"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              animation: `twinkle ${star.duration}s ease-in-out ${star.delay}s infinite`,
+              opacity: 0.3,
+            }}
+          />
+        ))}
+      </div>
 
-      {/* Shooting stars */}
-      {shootingStars.map((star) => (
-        <div
-          key={star.id}
-          className="absolute h-[2px] w-[100px] rounded-full"
-          style={{
-            left: `${star.x}%`,
-            top: `${star.y}%`,
-            background:
-              "linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)",
-            transform: "rotate(-45deg)",
-            animation: `shoot 1.5s ease-out ${star.delay}s`,
-            opacity: 0,
-          }}
-        />
-      ))}
+      {/* Shooting stars layer - z-index: 1 */}
+      <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
+        {shootingStars.map((star) => (
+          <div
+            key={star.id}
+            className="absolute h-[2px] w-[100px] rounded-full will-change-transform"
+            style={{
+              left: `${star.startX}%`,
+              top: `${star.startY}%`,
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)",
+              animation: `shoot 2s ease-out ${star.delay}s infinite`,
+              opacity: 0,
+            }}
+          />
+        ))}
+      </div>
 
       <style jsx>{`
         @keyframes twinkle {
@@ -91,20 +88,20 @@ export function AnimatedBackground() {
         @keyframes shoot {
           0% {
             opacity: 0;
-            transform: translateX(0) translateY(0) rotate(-45deg);
+            transform: translate(0, 0) rotate(-45deg);
           }
-          10% {
+          5% {
             opacity: 1;
           }
-          90% {
+          95% {
             opacity: 0.8;
           }
           100% {
             opacity: 0;
-            transform: translateX(300px) translateY(300px) rotate(-45deg);
+            transform: translate(400px, 400px) rotate(-45deg);
           }
         }
       `}</style>
-    </div>
+    </>
   );
 }
