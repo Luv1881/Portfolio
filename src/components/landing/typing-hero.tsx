@@ -8,60 +8,6 @@ import { CONTACT_LINK, NAV_ITEMS } from "@/components/layout/site-header";
 
 const PHRASES = ["Luv Gupta", "Software Engineer"] as const;
 
-// Neural mesh node component
-function NeuralNode({ x, y, index }: { x: number; y: number; index: number }) {
-  return (
-    <motion.circle
-      cx={x}
-      cy={y}
-      r="4"
-      fill="currentColor"
-      className="text-accent"
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{
-        opacity: [0.2, 0.6, 0.2],
-        scale: [1, 1.3, 1],
-      }}
-      transition={{
-        duration: 3,
-        repeat: Infinity,
-        delay: index * 0.1,
-        ease: "easeInOut",
-      }}
-    />
-  );
-}
-
-// Particle component
-function Particle({ index }: { index: number }) {
-  const [position] = useState({
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-  });
-
-  return (
-    <motion.div
-      className="absolute h-1 w-1 rounded-full bg-accent-3"
-      style={{
-        left: `${position.x}%`,
-        top: `${position.y}%`,
-      }}
-      animate={{
-        x: [0, Math.random() * 40 - 20, 0],
-        y: [0, Math.random() * 40 - 20, 0],
-        opacity: [0.2, 0.5, 0.2],
-        scale: [1, 1.5, 1],
-      }}
-      transition={{
-        duration: 4 + Math.random() * 4,
-        repeat: Infinity,
-        delay: index * 0.1,
-        ease: "easeInOut",
-      }}
-    />
-  );
-}
-
 export function TypingHero() {
   const { text } = useTypewriter({
     words: PHRASES as unknown as string[],
@@ -100,144 +46,8 @@ export function TypingHero() {
     return () => window.removeEventListener("resize", updateLineWidth);
   }, [updateLineWidth]);
 
-  // Generate neural mesh nodes
-  const neuralNodes = useMemo(() => {
-    const nodes = [];
-    for (let i = 0; i < 12; i++) {
-      nodes.push({
-        x: (i % 4) * 33 + 10,
-        y: Math.floor(i / 4) * 33 + 10,
-        index: i,
-      });
-    }
-    return nodes;
-  }, []);
-
   return (
-    <main className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-background text-text">
-      {/* Neural Mesh Background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <svg
-          className="absolute inset-0 h-full w-full opacity-30"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Animated connections */}
-          {neuralNodes.map((node, i) =>
-            neuralNodes.slice(i + 1).map((targetNode, j) => {
-              const distance = Math.sqrt(
-                Math.pow(targetNode.x - node.x, 2) + Math.pow(targetNode.y - node.y, 2),
-              );
-              if (distance < 40) {
-                return (
-                  <motion.line
-                    key={`${i}-${j}`}
-                    x1={node.x}
-                    y1={node.y}
-                    x2={targetNode.x}
-                    y2={targetNode.y}
-                    stroke="currentColor"
-                    strokeWidth="0.1"
-                    className="text-accent-2"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: [0.05, 0.2, 0.05],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: (i + j) * 0.1,
-                    }}
-                    filter="url(#glow)"
-                  />
-                );
-              }
-              return null;
-            }),
-          )}
-
-          {/* Nodes */}
-          {neuralNodes.map((node) => (
-            <NeuralNode key={node.index} x={node.x} y={node.y} index={node.index} />
-          ))}
-        </svg>
-      </div>
-
-      {/* Particle Field */}
-      <div className="pointer-events-none absolute inset-0">
-        {Array.from({ length: 30 }).map((_, i) => (
-          <Particle key={i} index={i} />
-        ))}
-      </div>
-
-      {/* Liquid Morphing Shapes */}
-      <div className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute left-[15%] top-[15%] h-[600px] w-[600px] rounded-full opacity-20 blur-[150px]"
-          style={{
-            background:
-              "radial-gradient(circle at center, var(--accent) 0%, transparent 70%)",
-          }}
-          animate={{
-            x: [0, 60, -30, 0],
-            y: [0, -40, 60, 0],
-            scale: [1, 1.2, 0.9, 1],
-            rotate: [0, 90, 180, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute right-[15%] top-[30%] h-[500px] w-[500px] rounded-full opacity-15 blur-[130px]"
-          style={{
-            background:
-              "radial-gradient(circle at center, var(--accent-2) 0%, transparent 70%)",
-          }}
-          animate={{
-            x: [0, -50, 40, 0],
-            y: [0, 70, -30, 0],
-            scale: [1, 0.85, 1.15, 1],
-            rotate: [0, -90, -180, -360],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="opacity-12 absolute bottom-[20%] left-[35%] h-[550px] w-[550px] rounded-full blur-[140px]"
-          style={{
-            background:
-              "radial-gradient(circle at center, var(--accent-3) 0%, transparent 70%)",
-          }}
-          animate={{
-            x: [0, 40, -60, 0],
-            y: [0, -50, 30, 0],
-            scale: [1, 1.1, 0.95, 1],
-            rotate: [0, 120, 240, 360],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
-
+    <main className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-[#0a0a0a] text-text">
       {/* Main Content - Perfectly Centered */}
       <motion.section
         className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-12 px-6 text-center sm:gap-16"
@@ -281,9 +91,7 @@ export function TypingHero() {
                 aria-live="polite"
                 aria-atomic
               >
-                <span className="gradient-text-premium">
-                  {text}
-                </span>
+                <span className="gradient-text-premium">{text}</span>
                 <motion.span
                   className="animate-caret ml-3 inline-block h-[1.2em] w-[3px] flex-shrink-0 bg-accent"
                   animate={{
@@ -313,22 +121,6 @@ export function TypingHero() {
             Crafting exceptional digital experiences through innovative engineering and
             thoughtful design
           </motion.p>
-
-          {/* Holographic glow effect */}
-          <div className="pointer-events-none absolute inset-0 -z-10">
-            <motion.div
-              className="absolute left-1/2 top-1/2 h-80 w-full max-w-4xl -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent opacity-25 blur-[120px]"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.25, 0.35, 0.25],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </div>
         </div>
 
         {/* Hidden measurer */}
