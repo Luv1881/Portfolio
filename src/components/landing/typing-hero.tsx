@@ -1,50 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { useTypewriter } from "@/hooks/use-typewriter";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { GlitchText } from "@/components/effects/glitch-text";
 import { CONTACT_LINK, NAV_ITEMS } from "@/components/layout/site-header";
 
 const PHRASES = ["Luv Gupta", "Software Engineer"] as const;
 
 export function TypingHero() {
-  const { text } = useTypewriter({
-    words: PHRASES as unknown as string[],
-    typeSpeed: 85,
-    deleteSpeed: 55,
-    holdTime: 1200,
-    startDelay: 250,
-    loop: true,
-  });
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [key, setKey] = useState(0);
 
-  const measureRef = useRef<HTMLSpanElement>(null);
-  const [lineWidth, setLineWidth] = useState<number>(0);
+  // Cycle through phrases
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhraseIndex((prev) => (prev + 1) % PHRASES.length);
+      setKey((prev) => prev + 1);
+    }, 5000); // Change phrase every 5 seconds
 
-  const measureClasses = useMemo(
-    () =>
-      "text-5xl font-bold uppercase tracking-[0.3em] md:text-7xl lg:text-8xl whitespace-nowrap",
-    [],
-  );
-
-  const updateLineWidth = useCallback(() => {
-    if (!measureRef.current) return;
-    const el = measureRef.current;
-    let max = 0;
-    for (const w of PHRASES) {
-      el.textContent = w;
-      const width = el.offsetWidth;
-      if (width > max) max = width;
-    }
-    el.textContent = "";
-    setLineWidth(max + 4);
+    return () => clearInterval(interval);
   }, []);
-
-  useLayoutEffect(() => {
-    updateLineWidth();
-    window.addEventListener("resize", updateLineWidth);
-    return () => window.removeEventListener("resize", updateLineWidth);
-  }, [updateLineWidth]);
 
   return (
     <main className="relative flex h-screen w-full items-center justify-center overflow-hidden text-text">
@@ -72,7 +48,7 @@ export function TypingHero() {
           </span>
         </motion.div>
 
-        {/* Holographic Hero Text with Chromatic Aberration */}
+        {/* Holographic Hero Text with Glitch Animation */}
         <div className="relative flex w-full flex-col items-center justify-center gap-8 py-8">
           <motion.div
             className="relative py-4"
@@ -81,33 +57,21 @@ export function TypingHero() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <h1 className="text-5xl font-bold uppercase leading-none tracking-[0.3em] text-text sm:text-6xl md:text-7xl lg:text-8xl">
-              <span
-                className="relative inline-flex items-center justify-center whitespace-nowrap"
-                style={
-                  lineWidth
-                    ? {
-                        width: `${lineWidth}px`,
-                        maxWidth: "90vw",
-                        minHeight: "1.2em",
-                        display: "inline-flex",
-                      }
-                    : {
-                        maxWidth: "90vw",
-                        minHeight: "1.2em",
-                        display: "inline-flex",
-                      }
-                }
-                aria-live="polite"
-                aria-atomic
-              >
-                <span
-                  className="inline-block text-[#00a8ff]"
-                  style={{ minWidth: "1ch" }}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-block"
                 >
-                  {text || "\u00A0"}
-                </span>
-                <span className="animate-caret ml-3 inline-block h-[1.2em] w-[3px] flex-shrink-0 bg-[#00a8ff]" />
-              </span>
+                  <GlitchText
+                    text={PHRASES[currentPhraseIndex]}
+                    className="text-[#00a8ff]"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </h1>
           </motion.div>
 
@@ -122,12 +86,6 @@ export function TypingHero() {
             thoughtful design
           </motion.p>
         </div>
-
-        {/* Hidden measurer */}
-        <span
-          ref={measureRef}
-          className={`${measureClasses} absolute -left-[9999px] -top-[9999px]`}
-        />
 
         {/* CTA Buttons */}
         <motion.div
