@@ -73,9 +73,9 @@ export function TypingHero() {
         </motion.div>
 
         {/* Holographic Hero Text with Chromatic Aberration */}
-        <div className="relative flex w-full flex-col items-center justify-center gap-8">
+        <div className="relative flex w-full flex-col items-center justify-center gap-8 py-8">
           <motion.div
-            className="relative"
+            className="relative py-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -88,30 +88,16 @@ export function TypingHero() {
                     ? {
                         width: `${lineWidth}px`,
                         maxWidth: "90vw",
-                        minHeight: "1.2em",
-                        height: "1.2em",
+                        minHeight: "1.5em",
+                        height: "1.5em",
                       }
-                    : { maxWidth: "90vw", minHeight: "1.2em", height: "1.2em" }
+                    : { maxWidth: "90vw", minHeight: "1.5em", height: "1.5em" }
                 }
                 aria-live="polite"
                 aria-atomic
               >
-                <span className="gradient-text-premium">{text}</span>
-                <motion.span
-                  className="animate-caret ml-3 inline-block h-[1.2em] w-[3px] flex-shrink-0 bg-accent"
-                  animate={{
-                    boxShadow: [
-                      "0 0 10px rgba(0,102,255,0.8)",
-                      "0 0 20px rgba(0,102,255,1)",
-                      "0 0 10px rgba(0,102,255,0.8)",
-                    ],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                <span className="text-[#00a8ff]">{text}</span>
+                <span className="animate-caret ml-3 inline-block h-[1.2em] w-[3px] flex-shrink-0 bg-[#00a8ff]" />
               </span>
             </h1>
           </motion.div>
