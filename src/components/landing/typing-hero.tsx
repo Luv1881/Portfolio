@@ -80,23 +80,32 @@ export function TypingHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <h1 className="text-5xl font-bold uppercase leading-tight tracking-[0.3em] text-text sm:text-6xl md:text-7xl lg:text-8xl">
+            <h1 className="text-5xl font-bold uppercase leading-none tracking-[0.3em] text-text sm:text-6xl md:text-7xl lg:text-8xl">
               <span
-                className="inline-flex items-center justify-center whitespace-nowrap"
+                className="relative inline-flex items-center justify-center whitespace-nowrap"
                 style={
                   lineWidth
                     ? {
                         width: `${lineWidth}px`,
                         maxWidth: "90vw",
-                        minHeight: "1.5em",
-                        height: "1.5em",
+                        minHeight: "1.2em",
+                        display: "inline-flex",
                       }
-                    : { maxWidth: "90vw", minHeight: "1.5em", height: "1.5em" }
+                    : {
+                        maxWidth: "90vw",
+                        minHeight: "1.2em",
+                        display: "inline-flex",
+                      }
                 }
                 aria-live="polite"
                 aria-atomic
               >
-                <span className="text-[#00a8ff]">{text}</span>
+                <span
+                  className="inline-block text-[#00a8ff]"
+                  style={{ minWidth: "1ch" }}
+                >
+                  {text || "\u00A0"}
+                </span>
                 <span className="animate-caret ml-3 inline-block h-[1.2em] w-[3px] flex-shrink-0 bg-[#00a8ff]" />
               </span>
             </h1>
