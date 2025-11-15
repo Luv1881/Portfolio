@@ -50,8 +50,8 @@ export function PageTransition({ children }: PageTransitionProps) {
   // Spring physics for natural motion
   const spring = {
     type: "spring",
-    stiffness: 380,
-    damping: 30,
+    stiffness: 300,
+    damping: 28,
   } as const;
 
   return (
@@ -61,16 +61,17 @@ export function PageTransition({ children }: PageTransitionProps) {
         initial={
           firstRender.current || prefersReduced
             ? false
-            : { opacity: 0, y: 12, scale: 0.98 }
+            : { opacity: 0, y: 20, scale: 0.96 }
         }
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -12, scale: 0.98 }}
+        exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -20, scale: 0.96 }}
         transition={
           prefersReduced
             ? { duration: 0.15 }
             : {
                 ...spring,
-                opacity: { duration: 0.25, ease: transitionEase },
+                opacity: { duration: 0.35, ease: transitionEase },
+                scale: { duration: 0.4, ease: transitionEase },
               }
         }
         className="flex min-h-screen flex-col"
