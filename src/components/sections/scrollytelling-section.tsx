@@ -1,20 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { experience } from "@/data/experience";
 import { featuredProjects } from "@/data/projects";
 import Link from "next/link";
 
 export function ScrollyTellingSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const projectsY = useTransform(scrollYProgress, [0.3, 0.7], [150, 0]);
-  const projectsOpacity = useTransform(scrollYProgress, [0.3, 0.5, 0.8], [0, 1, 1]);
 
   return (
     <div ref={containerRef} className="relative w-full">
@@ -23,10 +16,10 @@ export function ScrollyTellingSection() {
         <div className="mx-auto max-w-5xl px-6">
           <motion.div
             className="w-fit"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "0px", amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="mb-4 bg-gradient-to-r from-accent via-accent-3 to-accent bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-6xl">
               Experience
@@ -45,13 +38,18 @@ export function ScrollyTellingSection() {
               <motion.div
                 key={index}
                 className="scrolly-item border-border/20 group relative grid gap-8 border-l-2 pl-8 md:grid-cols-[1fr_2fr] md:gap-16"
-                initial={{ opacity: 0, x: -30, y: 30 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                initial={{ opacity: 0, x: -30, y: 30, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, x: 0, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, margin: "-100px", amount: 0.2 }}
                 transition={{
                   duration: 0.8,
                   delay: index * 0.1,
                   ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={{
+                  scale: 1.02,
+                  x: 10,
+                  transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
                 }}
               >
                 {/* Timeline dot */}
@@ -80,17 +78,31 @@ export function ScrollyTellingSection() {
                 <div className="space-y-2">
                   <motion.h3
                     className="text-3xl font-bold text-text"
-                    whileHover={{ color: "var(--accent)", x: 5 }}
+                    whileHover={{
+                      color: "var(--accent)",
+                      x: 5,
+                      textShadow: "0 0 20px rgba(0, 102, 255, 0.5)",
+                    }}
+                    transition={{ duration: 0.2 }}
                   >
                     {item.company}
                   </motion.h3>
-                  <p className="text-accent/80 text-sm font-medium uppercase tracking-widest">
+                  <motion.p
+                    className="text-accent/80 text-sm font-medium uppercase tracking-widest"
+                    initial={{ opacity: 0.8 }}
+                    whileHover={{ opacity: 1, scale: 1.05 }}
+                  >
                     {item.period}
-                  </p>
+                  </motion.p>
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="text-2xl font-medium text-accent-3">{item.role}</h4>
+                  <motion.h4
+                    className="text-2xl font-medium text-accent-3"
+                    whileHover={{ x: 5, color: "var(--accent)" }}
+                  >
+                    {item.role}
+                  </motion.h4>
                   <p className="text-muted/80 text-lg font-light leading-relaxed">
                     {item.summary}
                   </p>
@@ -105,12 +117,11 @@ export function ScrollyTellingSection() {
       <section id="projects" className="relative min-h-screen bg-transparent py-32">
         <div className="mx-auto max-w-5xl px-6">
           <motion.div
-            style={{ y: projectsY, opacity: projectsOpacity }}
             className="w-fit"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-200px" }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "0px", amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="mb-4 bg-gradient-to-r from-accent via-accent-3 to-accent bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-6xl">
               Selected Work

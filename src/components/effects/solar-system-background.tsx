@@ -86,6 +86,7 @@ export function SolarSystemBackground() {
       name: string;
       hasRing: boolean;
       hasMoon?: boolean;
+      inclination: number;
     };
     const planets: Array<{
       mesh: THREE.Mesh;
@@ -103,6 +104,7 @@ export function SolarSystemBackground() {
         speed: 0.047,
         name: "Mercury",
         hasRing: false,
+        inclination: 0.12, // Orbital inclination in radians
       },
       {
         size: 0.9,
@@ -111,6 +113,7 @@ export function SolarSystemBackground() {
         speed: 0.035,
         name: "Venus",
         hasRing: false,
+        inclination: 0.06,
       },
       {
         size: 1.0,
@@ -120,6 +123,7 @@ export function SolarSystemBackground() {
         name: "Earth",
         hasRing: false,
         hasMoon: true,
+        inclination: 0.0,
       },
       {
         size: 0.6,
@@ -128,6 +132,7 @@ export function SolarSystemBackground() {
         speed: 0.024,
         name: "Mars",
         hasRing: false,
+        inclination: 0.03,
       },
       {
         size: 2.2,
@@ -136,6 +141,7 @@ export function SolarSystemBackground() {
         speed: 0.013,
         name: "Jupiter",
         hasRing: false,
+        inclination: 0.02,
       },
       {
         size: 1.9,
@@ -144,6 +150,7 @@ export function SolarSystemBackground() {
         speed: 0.009,
         name: "Saturn",
         hasRing: true,
+        inclination: 0.04,
       },
       {
         size: 1.3,
@@ -152,6 +159,7 @@ export function SolarSystemBackground() {
         speed: 0.006,
         name: "Uranus",
         hasRing: true,
+        inclination: 0.01,
       },
       {
         size: 1.2,
@@ -160,6 +168,7 @@ export function SolarSystemBackground() {
         speed: 0.005,
         name: "Neptune",
         hasRing: false,
+        inclination: 0.03,
       },
     ];
 
@@ -203,7 +212,7 @@ export function SolarSystemBackground() {
         planet.add(ring);
       }
 
-      // Orbit Path
+      // Orbit Path with inclination
       const orbitCurve = new THREE.EllipseCurve(
         0,
         0,
@@ -220,19 +229,24 @@ export function SolarSystemBackground() {
       const orbitMaterial = new THREE.LineBasicMaterial({
         color: 0xffffff,
         transparent: true,
-        opacity: 0.1,
+        opacity: 0.12,
       });
 
       const orbit = new THREE.Line(orbitGeometry, orbitMaterial);
       orbit.rotation.x = Math.PI / 2;
+      // Apply orbital inclination
+      orbit.rotation.z = data.inclination;
 
       solarSystem.add(orbit);
       orbits.push(orbit);
 
-      // Initial Position
+      // Initial Position with inclination
       const initialAngle = (idx / planetData.length) * Math.PI * 2;
       planet.position.x = Math.cos(initialAngle) * data.distance;
-      planet.position.z = Math.sin(initialAngle) * data.distance;
+      planet.position.y =
+        Math.sin(initialAngle) * data.distance * Math.sin(data.inclination);
+      planet.position.z =
+        Math.sin(initialAngle) * data.distance * Math.cos(data.inclination);
 
       solarSystem.add(planet);
 
@@ -341,6 +355,66 @@ export function SolarSystemBackground() {
     scene.add(stars2);
     scene.add(stars3);
 
+    // Dynamic Comet System
+    const comets: Array<{
+      mesh: THREE.Mesh;
+      trail: THREE.Line;
+      angle: number;
+      speed: number;
+      distance: number;
+      phase: number;
+    }> = [];
+
+    const createComet = () => {
+      // Comet head
+      const cometGeo = new THREE.SphereGeometry(0.3, 16, 16);
+      const cometMat = new THREE.MeshBasicMaterial({
+        color: 0xaaddff,
+        transparent: true,
+        opacity: 0.9,
+      });
+      const comet = new THREE.Mesh(cometGeo, cometMat);
+
+      // Comet glow
+      const glowGeo = new THREE.SphereGeometry(0.6, 16, 16);
+      const glowMat = new THREE.MeshBasicMaterial({
+        color: 0x6699ff,
+        transparent: true,
+        opacity: 0.4,
+        blending: THREE.AdditiveBlending,
+      });
+      const glow = new THREE.Mesh(glowGeo, glowMat);
+      comet.add(glow);
+
+      // Comet trail
+      const trailPoints: THREE.Vector3[] = [];
+      for (let i = 0; i < 30; i++) {
+        trailPoints.push(new THREE.Vector3(0, 0, 0));
+      }
+      const trailGeometry = new THREE.BufferGeometry().setFromPoints(trailPoints);
+      const trailMaterial = new THREE.LineBasicMaterial({
+        color: 0x88ccff,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      });
+      const trail = new THREE.Line(trailGeometry, trailMaterial);
+      scene.add(trail);
+
+      const distance = 60 + Math.random() * 50;
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 0.02 + Math.random() * 0.03;
+      const phase = Math.random() * Math.PI * 2;
+
+      scene.add(comet);
+      comets.push({ mesh: comet, trail, angle, speed, distance, phase });
+    };
+
+    // Create 3-5 comets
+    for (let i = 0; i < 3; i++) {
+      createComet();
+    }
+
     // Camera Initial Position - dynamic starting position
     camera.position.set(0, 50, 80);
     camera.lookAt(0, 0, 0);
@@ -359,16 +433,19 @@ export function SolarSystemBackground() {
       // Subtle solar system rotation
       solarSystem.rotation.y += 0.0002;
 
-      // Rotate and orbit planets
+      // Rotate and orbit planets with inclination
       planets.forEach((planetObj) => {
         const { mesh, data, moons } = planetObj;
 
         // Update planet angle
         planetObj.angle += data.speed * 0.01;
 
-        // Calculate position
+        // Calculate position with orbital inclination
         mesh.position.x = Math.cos(planetObj.angle) * data.distance;
-        mesh.position.z = Math.sin(planetObj.angle) * data.distance;
+        mesh.position.y =
+          Math.sin(planetObj.angle) * data.distance * Math.sin(data.inclination);
+        mesh.position.z =
+          Math.sin(planetObj.angle) * data.distance * Math.cos(data.inclination);
 
         // Rotate planet on axis
         mesh.rotation.y += 0.01;
@@ -390,6 +467,31 @@ export function SolarSystemBackground() {
         asteroid.rotation.y += 0.002 * (1 + (i % 5));
       });
 
+      // Animate comets with trails
+      comets.forEach((cometData) => {
+        const { mesh, trail, speed, distance, phase } = cometData;
+        cometData.angle += speed * 0.01;
+
+        // Elliptical orbit for comets
+        const x = Math.cos(cometData.angle + phase) * distance;
+        const y = Math.sin(cometData.angle * 2 + phase) * 15;
+        const z = Math.sin(cometData.angle + phase) * distance * 0.8;
+
+        mesh.position.set(x, y, z);
+
+        // Update trail
+        const positions = trail.geometry.attributes.position.array as Float32Array;
+        for (let i = positions.length - 3; i >= 3; i -= 3) {
+          positions[i] = positions[i - 3];
+          positions[i + 1] = positions[i - 2];
+          positions[i + 2] = positions[i - 1];
+        }
+        positions[0] = x;
+        positions[1] = y;
+        positions[2] = z;
+        trail.geometry.attributes.position.needsUpdate = true;
+      });
+
       // Pulsing sun effect
       const sunPulse = 1 + Math.sin(time * 0.5) * 0.05;
       sun.scale.set(sunPulse, sunPulse, sunPulse);
@@ -398,19 +500,23 @@ export function SolarSystemBackground() {
       const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
       const scrollFraction = Math.min(scrollY / maxScroll, 1);
 
-      // Cinematic camera trajectory
-      const targetY = 50 - scrollFraction * 45; // 50 -> 5
-      const targetZ = 80 - scrollFraction * 65; // 80 -> 15
-      const targetX = scrollFraction * 20; // 0 -> 20 (side angle)
+      // Cinematic camera trajectory with easing
+      const easeInOutCubic = (t: number) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const easedScroll = easeInOutCubic(scrollFraction);
+
+      const targetY = 50 - easedScroll * 45; // 50 -> 5
+      const targetZ = 80 - easedScroll * 65; // 80 -> 15
+      const targetX = easedScroll * 20; // 0 -> 20 (side angle)
 
       // Mouse parallax effect
       const parallaxX = (mouseX / window.innerWidth - 0.5) * 15;
       const parallaxY = (mouseY / window.innerHeight - 0.5) * 15;
 
-      // Smooth camera interpolation
-      camera.position.y += (targetY + parallaxY - camera.position.y) * 0.05;
-      camera.position.z += (targetZ - camera.position.z) * 0.05;
-      camera.position.x += (targetX + parallaxX - camera.position.x) * 0.05;
+      // Smooth camera interpolation with better damping
+      camera.position.y += (targetY + parallaxY - camera.position.y) * 0.08;
+      camera.position.z += (targetZ - camera.position.z) * 0.08;
+      camera.position.x += (targetX + parallaxX - camera.position.x) * 0.08;
 
       camera.lookAt(0, 0, 0);
 
