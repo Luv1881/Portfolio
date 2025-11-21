@@ -203,36 +203,6 @@ export function TypingHero() {
         </motion.div>
 
         {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1,
-            delay: 2,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-muted/50 text-xs uppercase tracking-widest">
-              Scroll
-            </span>
-            <svg
-              className="text-accent/50 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </div>
-        </motion.div>
       </motion.section>
     </main>
   );
