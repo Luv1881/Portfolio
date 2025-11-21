@@ -6,8 +6,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 export const NAV_ITEMS = [
   { label: "Blogs", href: "/blogs" },
-  { label: "Experience", href: "/experience" },
-  { label: "Projects", href: "/projects" },
+  { label: "Talks", href: "/talks" },
 ] as const;
 
 export const CONTACT_LINK = "mailto:hello@luvgupta.com";

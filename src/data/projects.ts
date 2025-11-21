@@ -18,96 +18,65 @@ export const featuredProjects: Project[] = [
   {
     slug: "pillbox",
     title: "Pillbox",
-    description: "Your personal medication tracker",
+    description: "Your personal medication tracker for better health management",
     year: "2023",
     tags: ["React.js", "Python", "UX"],
     overview:
-      "Pillbox is meant to track medicine schedules and alert them based on their set schedule. Mainly meant for elderly people who easily forget to take their medicines",
+      "Pillbox is a medication tracking application designed to help users manage their medicine schedules with timely alerts. Focused on accessibility and ease of use for elderly users who may need reminders for their daily medications.",
     highlights: [
-      "Built a shader-driven particle renderer capable of 120k points at 60fps on mid-tier GPUs.",
-      "Paired WebRTC with a resilient command queue so remote teams can co-pilot investigations.",
-      "Invented a spatial picker that converts 3D selection to declarative query filters in real time.",
+      "Intuitive interface designed for elderly users with large, clear text and simple navigation",
+      "Smart notification system that sends timely reminders based on custom schedules",
+      "Medication history tracking and adherence analytics for caregivers",
     ],
-    links: [
-      { label: "Live Prototype", href: "https://github.com/RayGL1TCH/PillBox" },
-      // { label: "Design Notes", href: "https://notes.luvgupta.com/nebula-build" },
-    ],
+    links: [{ label: "View on GitHub", href: "https://github.com/RayGL1TCH/PillBox" }],
   },
   {
     slug: "faq-chatbot",
     title: "FAQ Chatbot",
-    description:
-      "Healthcare analytics control room that compresses millions of signals into actionable, explainable insights.",
+    description: "Intelligent conversational AI for automated customer support",
     year: "2023",
-    tags: ["Next.js", "AI", "Design Systems"],
+    tags: ["Next.js", "AI", "NLP"],
     overview:
-      "Pulse collects telemetry from hospital devices and models predicted load, triage risk, and staffing gaps. The experience fuses dense decision layers into an interface that feels approachable to clinicians on the move.",
+      "An AI-powered chatbot system that handles frequently asked questions with natural language understanding. Built to reduce support load and provide instant, accurate responses to common user queries.",
     highlights: [
-      "Delivered a component system tuned for large touch displays and assistive tech compliance.",
-      "Embedded explainability primitives next to every ML projection so teams can trust automation.",
-      "Introduced incident rehearsals that let staff simulate surges before rolling out live updates.",
+      "Natural language processing for understanding user intent and context",
+      "Integration with knowledge bases for dynamic, up-to-date responses",
+      "Analytics dashboard showing common questions and user satisfaction metrics",
     ],
-    links: [
-      { label: "Case Study", href: "https://projects.luvgupta.com/pulse" },
-      { label: "System Tokens", href: "https://design.luvgupta.com/pulse" },
-    ],
+    links: [{ label: "View Demo", href: "#" }],
   },
   {
-    slug: "Invisible ink in AI",
+    slug: "invisible-ink-in-ai",
     title: "Invisible Ink in AI",
-    description:
-      "Boutique product studio partnering with founders to deliver expressive, production-ready experiences.",
-    year: "2022",
-    tags: ["Consulting", "Strategy", "Product"],
+    description: "Exploring steganography and watermarking in AI-generated content",
+    year: "2024",
+    tags: ["AI", "Security", "Research"],
     overview:
-      "Ripple Studio is the playground where I help early teams craft opinionated product foundations fast. From naming to handoff, every engagement ships with a living design language and instrumentation baked in.",
+      "Research project investigating digital watermarking techniques for AI-generated content. Explores methods to embed invisible markers in AI outputs for authenticity verification and content attribution.",
     highlights: [
-      "Scaled a founder's MVP into a multi-tenant SaaS in under 10 weeks with automated billing.",
-      "Facilitated branding sprints that translated directly into component libraries and docs.",
-      "Mentored internal engineers on performance budgets and progressive disclosure patterns.",
+      "Novel watermarking algorithms that survive image compression and transformations",
+      "Detection system with high accuracy for identifying AI-generated content",
+      "Applications in copyright protection and misinformation prevention",
     ],
     links: [
-      { label: "Studio Website", href: "https://luvgupta.com/ripple" },
-      { label: "Starter Playbook", href: "https://notes.luvgupta.com/ripple-playbook" },
+      { label: "Research Paper", href: "#" },
+      { label: "Demo", href: "#" },
     ],
   },
   {
-    slug: "low-latency-market-data-feed-handler",
+    slug: "market-data-feed-handler",
     title: "Market Data Feed Handler",
-    description:
-      "Boutique product studio partnering with founders to deliver expressive, production-ready experiences.",
-    year: "2022",
-    tags: ["Consulting", "Strategy", "Product"],
+    description: "High-performance real-time financial data processing system",
+    year: "2024",
+    tags: ["C++", "Finance", "Low Latency"],
     overview:
-      "Ripple Studio is the playground where I help early teams craft opinionated product foundations fast. From naming to handoff, every engagement ships with a living design language and instrumentation baked in.",
+      "Ultra-low latency market data feed handler built for high-frequency trading environments. Processes millions of market updates per second with microsecond-level precision.",
     highlights: [
-      "Scaled a founder's MVP into a multi-tenant SaaS in under 10 weeks with automated billing.",
-      "Facilitated branding sprints that translated directly into component libraries and docs.",
-      "Mentored internal engineers on performance budgets and progressive disclosure patterns.",
+      "Sub-microsecond latency processing with lock-free data structures",
+      "Multi-threaded architecture optimized for modern CPU architectures",
+      "Support for multiple exchange protocols and data normalization",
     ],
-    links: [
-      { label: "Studio Website", href: "https://luvgupta.com/ripple" },
-      { label: "Starter Playbook", href: "https://notes.luvgupta.com/ripple-playbook" },
-    ],
-  },
-  {
-    slug: "low-latency-market-data-feed-handler",
-    title: "Market Data Feed Handler",
-    description:
-      "Boutique product studio partnering with founders to deliver expressive, production-ready experiences.",
-    year: "2022",
-    tags: ["Consulting", "Strategy", "Product"],
-    overview:
-      "Ripple Studio is the playground where I help early teams craft opinionated product foundations fast. From naming to handoff, every engagement ships with a living design language and instrumentation baked in.",
-    highlights: [
-      "Scaled a founder's MVP into a multi-tenant SaaS in under 10 weeks with automated billing.",
-      "Facilitated branding sprints that translated directly into component libraries and docs.",
-      "Mentored internal engineers on performance budgets and progressive disclosure patterns.",
-    ],
-    links: [
-      { label: "Studio Website", href: "https://luvgupta.com/ripple" },
-      { label: "Starter Playbook", href: "https://notes.luvgupta.com/ripple-playbook" },
-    ],
+    links: [{ label: "Technical Overview", href: "#" }],
   },
 ];
 
