@@ -233,9 +233,8 @@ export function SolarSystemBackground() {
       });
 
       const orbit = new THREE.Line(orbitGeometry, orbitMaterial);
-      orbit.rotation.x = Math.PI / 2;
-      // Apply orbital inclination
-      orbit.rotation.z = data.inclination;
+      // Rotate to XZ plane and apply inclination around X axis
+      orbit.rotation.x = Math.PI / 2 - data.inclination;
 
       solarSystem.add(orbit);
       orbits.push(orbit);

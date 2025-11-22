@@ -8,11 +8,11 @@
   --surface: #121214;
   --surface-raised: #1a1a1d;
   --surface-muted: #0e0e10;
-  --text: #f8f9fa;
-  --muted: #a1a3a8;
-  --accent: #0066ff;
-  --accent-2: #ff0066;
-  --accent-3: #00ccff;
+  --text: #e2e2e5;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --accent-2: #ec4899;
+  --accent-3: #06b6d4;
   --border: color-mix(in srgb, var(--accent) 15%, transparent);
   --shadow-soft: 0 24px 60px -30px rgba(0, 102, 255, 0.4);
   --header-bg: rgba(10, 10, 11, 0.9);

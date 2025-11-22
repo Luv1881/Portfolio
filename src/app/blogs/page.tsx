@@ -7,9 +7,12 @@ import { WritingCard } from "@/components/sections/writing-card";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { latestWriting } from "@/data/writing";
 
+import { SolarSystemBackground } from "@/components/effects/solar-system-background";
+
 export default function WritingPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-transparent">
+      <SolarSystemBackground />
       <main className="mx-auto flex max-w-5xl flex-col gap-16 px-6 py-16 md:gap-20 md:py-24">
         <ScrollReveal>
           <Section id="blogs" eyebrow="Latest" title="Blogs">
